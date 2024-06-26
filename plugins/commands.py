@@ -692,31 +692,34 @@ async def save_template(client, message):
 
 @Client.on_message(filters.command("add_prime") & filters.user(ADMINS))
 async def add_prime_status(client, message):
-    if len(message.command) == 4:
-        time_zone = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
-        current_time = time_zone.strftime("%d-%m-%Y\n⏱️ Joining time : %I:%M:%S %p") 
-        user_id = int(message.command[1])  # Convert the user_id to integer
-        user = await client.get_users(user_id)
-        time = message.command[2]+" "+message.command[3]
-        seconds = await get_seconds(time)
-        if seconds > 0:
-            expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
-            user_data = {"id": user_id, "expiry_time": expiry_time}  # Using "id" instead of "user_id"  
-            await db.update_user(user_data)  # Use the update_user method to update or insert user data
-            data = await db.get_user(user_id)
-            expiry = data.get("expiry_time")   
-            expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")         
-            await message.reply_text(f"{user.mention} Added to Prime list ✅\n\n👤 Name : {user.mention}\n⚡ ID : <code>{user_id}</code>\n⏰ Limit : <code>{time}</code>\n\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True)
-            await client.send_message(
-                chat_id=user_id,
-                text=f"👋 ʜᴇʏ {user.mention},\nThank you for purchasing prime membership.\n\n⏰ LIMIT : <code>{time}</code>\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True              
-            )
-            await client.send_message(PRIME_MEMBERS_LOGS, text=f"#New Prime member \n\n👤 Name : {user.mention}\n⚡ ID : <code>{user_id}</code>\n⏰ LIMIT : <code>{time}</code>\n\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True)
+    try:
+        if len(message.command) == 4:
+            time_zone = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+            current_time = time_zone.strftime("%d-%m-%Y\n⏱️ Joining time : %I:%M:%S %p") 
+            user_id = int(message.command[1])  # Convert the user_id to integer
+            user = await client.get_users(user_id)
+            time = message.command[2]+" "+message.command[3]
+            seconds = await get_seconds(time)
+            if seconds > 0:
+                expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
+                user_data = {"id": user_id, "expiry_time": expiry_time}  # Using "id" instead of "user_id"  
+                await db.update_user(user_data)  # Use the update_user method to update or insert user data
+                data = await db.get_user(user_id)
+                expiry = data.get("expiry_time")   
+                expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")         
+                await message.reply_text(f"{user.mention} Added to Prime list ✅\n\n👤 Name : {user.mention}\n⚡ ID : <code>{user_id}</code>\n⏰ Limit : <code>{time}</code>\n\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True)
+                await client.send_message(
+                    chat_id=user_id,
+                    text=f"👋 ʜᴇʏ {user.mention},\nThank you for purchasing prime membership.\n\n⏰ LIMIT : <code>{time}</code>\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True              
+                )
+                await client.send_message(PRIME_MEMBERS_LOGS, text=f"#New Prime member \n\n👤 Name : {user.mention}\n⚡ ID : <code>{user_id}</code>\n⏰ LIMIT : <code>{time}</code>\n\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True)
 
+            else:
+                await message.reply_text("Invalid time format. Please use '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year'")
         else:
-            await message.reply_text("Invalid time format. Please use '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year'")
-    else:
-        await message.reply_text("Usage : /add_prime user_id time (e.g., '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year')")
+            await message.reply_text("Usage : /add_prime user_id time (e.g., '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year')")
+    except Exception as e:
+        print(e)
 
 @Client.on_message(filters.command("remove_prime") & filters.user(ADMINS))
 async def remove_prime_state(client, message):
