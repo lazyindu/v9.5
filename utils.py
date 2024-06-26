@@ -465,6 +465,17 @@ def get_readable_time(seconds: int) -> str:
     readable_time += ": ".join(time_list)
     return readable_time 
 
+async def get_tutorial(chat_id):
+    settings = await get_settings(chat_id) #fetching settings for group
+    if 'tutorial' in settings.keys():
+        if settings['is_tutorial']:
+            TUTORIAL_URL = settings['tutorial']
+        else:
+            TUTORIAL_URL = TUTORIAL
+    else:
+        TUTORIAL_URL = TUTORIAL
+    return TUTORIAL_URL
+  
 
 
 # Credit @LazyDeveloper.

@@ -1705,7 +1705,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ident, key = query.data.split("#")
         settings = await get_settings(query.message.chat.id)
         try:
-            if settings['url_mode'] and user not in LZURL_PRIME_USERS:
+            if settings['url_mode'] and user not in PRIME_USERS:
                 await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start=sendfiles1_{key}")
                 return
             else:
@@ -2110,7 +2110,19 @@ async def cb_handler(client: Client, query: CallbackQuery):
        
     elif query.data == "select_option":
         await query.answer('👇👇 Please select anyone of the following  options 👇👇', show_alert=True)
-       
+    
+    elif query.data == "seeplans":
+        btn = [[
+            InlineKeyboardButton('🗑️ ᴄʟᴏꜱᴇ 🗑️', callback_data='close_data')
+        ]]
+        reply_markup = InlineKeyboardMarkup(btn)
+        await query.message.reply_photo(
+            photo=(PRIME_LOGO),
+            caption=script.PLANS_TXT.format(query.from_user.mention),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+
     elif query.data == "coct":
         buttons = [[
             InlineKeyboardButton('🚪 Back', callback_data='help')

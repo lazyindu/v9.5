@@ -172,6 +172,22 @@ Added By - {}
 ID - <code>{}</code>
 Name - {}
 """
+    PLANS_TXT = """<b>👋 ʜᴇʏ {},
+    
+🎖️ <u>ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs</u> :
+
+● <code>5₹</code> ➛ <u>ʙʀᴏɴᴢᴇ ᴘʟᴀɴ</u> » <code>7 ᴅᴀʏꜱ</code>
+● <code>18₹</code> ➛ <u>ꜱɪʟᴠᴇʀ ᴘʟᴀɴ</u> » <code>30 ᴅᴀʏꜱ</code>
+● <code>50₹</code> ➛ <u>ɢᴏʟᴅ ᴘʟᴀɴ</u> » <code>90 ᴅᴀʏꜱ</code>
+● <code>80₹</code> ➛ <u>ᴘʟᴀᴛɪɴᴜᴍ ᴘʟᴀɴ</u> » <code>180 ᴅᴀʏꜱ</code>
+● <code>150₹</code> ➛ <u>ᴅɪᴀᴍᴏɴᴅ ᴘʟᴀɴ</u> » <code>365 ᴅᴀʏꜱ</code>
+
+💵 ᴜᴘɪ ɪᴅ - <code>dm - @Silicon_Official</code>
+📸 ǫʀ ᴄᴏᴅᴇ - <a href='https://graph.org/file/02e7ecc3e2693b481b914.jpg'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ꜱᴄᴀɴ</a>
+
+⚜️ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ ʙʏ ᴜꜱɪɴɢ : /myplan
+
+‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.</b>"""
     PROGRESS_BAR = """\n
 ╭━━━━❰ PROGRESS BAR ❱━➣
 ┣⪼ 🗂️ : {1} | {2}

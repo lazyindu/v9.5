@@ -13,11 +13,9 @@ from utils import get_settings, get_size, is_subscribed, save_group_settings, te
 from database.connections_mdb import active_connection
 import pytz
 import datetime
-from utils import get_seconds
+from utils import get_seconds, get_tutorial, get_shortlink
 from database.users_chats_db import db 
-from pyrogram import Client, filters 
 from pyrogram.errors.exceptions.bad_request_400 import MessageTooLong
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 import re
 import json
 import base64
@@ -240,7 +238,27 @@ async def start(client, message):
                     continue
             await asyncio.sleep(1) 
         return await sts.delete()
-        
+    
+    if data.startswith("sendfiles"):
+        chat_id = int("-" + file_id.split("-")[1])
+        userid = message.from_user.id if message.from_user else None
+        ghost_url = await get_shortlink(chat_id, f"https://telegram.me/{temp.U_NAME}?start=allfiles_{file_id}")
+        client_msg = await client.send_message(chat_id=message.from_user.id,text=f"👋 Hey {message.from_user.mention}\n\nDownload Link Generated ✔, Kindly click on download button below 👇 .\n\n", reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton('📁 ᴅᴏᴡɴʟᴏᴀᴅ 📁', url=ghost_url)
+                    ], [
+                        InlineKeyboardButton('⚡ ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ⚡', url=await get_tutorial(chat_id))
+                    ], [
+                        InlineKeyboardButton('🎉 ʙᴜʏ ꜱᴜʙꜱᴄʀɪᴘᴛɪᴏɴ : ʀᴇᴍᴏᴠᴇ ᴀᴅꜱ 🎊', callback_data="seeplans")                        
+                    ]
+                ]
+            )
+        )
+        await asyncio.sleep(1800)
+        await client_msg.edit("<b>ʏᴏᴜʀ ᴍᴇꜱꜱᴀɢᴇ ɪꜱ ᴅᴇʟᴇᴛᴇᴅ !\nᴋɪɴᴅʟʏ ꜱᴇᴀʀᴄʜ ᴀɢᴀɪɴ.</b>")
+        return
+         
     elif data.startswith("all"):
         files = temp.GETALL.get(file_id)
         if not files:
@@ -270,10 +288,7 @@ async def start(client, message):
                 reply_markup=InlineKeyboardMarkup(
             [
              [
-              InlineKeyboardButton('🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ / ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🧿', callback_data=f'generate_stream_link:{file_id}'),
-             ],
-             [
-              InlineKeyboardButton('📌 ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ 📌', url=f'https://t.me/LazyDeveloperr')
+              InlineKeyboardButton('▶ Gen Stream / Download Link', callback_data=f'generate_stream_link:{file_id}'),
              ]
             ]
         )
@@ -720,7 +735,7 @@ async def add_prime_status(client, message):
             await message.reply_text("Usage : /add_prime user_id time (e.g., '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year')")
     except Exception as e:
         print(e)
-
+        
 @Client.on_message(filters.command("remove_prime") & filters.user(ADMINS))
 async def remove_prime_state(client, message):
     if len(message.command) == 2:
@@ -815,7 +830,7 @@ async def myplan(client, message):
             
         # Format time left as a string
         time_left_str = f"{days} ᴅᴀʏꜱ, {hours} ʜᴏᴜʀꜱ, {minutes} ᴍɪɴᴜᴛᴇꜱ"
-        await message.reply_text(f"⚜️ ᴘʀɪᴍᴇ ᴜꜱᴇʀ ᴅᴀᴛᴀ :\n\n👤 Name : {user}\n⚡ ID : <code>{user_id}</code>\n⏰ Time Left : {time_left_str}\n⌛️ Exp Date : {expiry_str_in_ist}")   
+        await message.reply_text(f"👑 ᴘʀɪᴍᴇ ᴜꜱᴇʀ ᴅᴀᴛᴀ :\n\n👤 Name : {user}\n⚡ ID : <code>{user_id}</code>\n⏰ Time Left : {time_left_str}\n⌛️ Exp Date : {expiry_str_in_ist}")   
     else:
         await message.reply_text(f"ʜᴇʏ {user},\n\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴀɴʏ ᴀᴄᴛɪᴠᴇ ᴘʀɪᴍᴇ ᴘʟᴀɴs, ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴛᴀᴋᴇ ᴘʀɪᴍᴇ ᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ 👇",
 	reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("💸 ᴄʜᴇᴄᴋᴏᴜᴛ ᴘʀɪᴍᴇ ᴘʟᴀɴꜱ 💸", callback_data='seeplans')]]))			 
@@ -829,3 +844,56 @@ async def plan(client, message):
         InlineKeyboardButton("📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ ʜᴇʀᴇ", user_id=int(5965340120))],[InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")
     ]]
     await message.reply_photo(photo="https://graph.org/file/55a5392f88ec5a4bd3379.jpg", caption=script.PREMIUM_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(btn))
+
+@Client.on_message(filters.command("set_tutorial"))
+async def settutorial(bot, message):
+    userid = message.from_user.id if message.from_user else None
+    if not userid:
+        return await message.reply(f"I did'nt recognise you as an admin. Try again ")
+    chat_type = message.chat.type
+    if chat_type == enums.ChatType.PRIVATE:
+        return await message.reply_text("This command works only in group")
+    elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+        grpid = message.chat.id
+        title = message.chat.title
+    else:
+        return
+    userid = message.from_user.id
+    user = await bot.get_chat_member(grpid, userid)
+    if user.status != enums.ChatMemberStatus.ADMINISTRATOR and user.status != enums.ChatMemberStatus.OWNER and str(userid) not in ADMINS:
+        return
+    else:
+        pass
+    if len(message.command) == 1:
+        return await message.reply("<b>ɢɪᴠᴇ ᴍᴇ ᴀ ᴛᴜᴛᴏʀɪᴀʟ ʟɪɴᴋ ᴀʟᴏɴɢ ᴡɪᴛʜ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ.\n\nᴜꜱᴀɢᴇ : /set_tutorial <code>https://t.me/LazyTutorialLink/23</code></b>")
+    elif len(message.command) == 2:
+        reply = await message.reply_text("<b>ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ...</b>")
+        tutorial = message.command[1]
+        await save_group_settings(grpid, 'tutorial', tutorial)
+        await save_group_settings(grpid, 'is_tutorial', True)
+        await reply.edit_text(f"<b>Tutorial added successfully ✔\n\nʏᴏᴜʀ ɢʀᴏᴜᴘ : {title}\n\nʏᴏᴜʀ ᴛᴜᴛᴏʀɪᴀʟ : <code>{tutorial}</code></b>")
+    else:
+        return await message.reply("<b>ʏᴏᴜ ᴇɴᴛᴇʀᴇᴅ ɪɴᴄᴏʀʀᴇᴄᴛ ꜰᴏʀᴍᴀᴛ !\nᴄᴏʀʀᴇᴄᴛ ꜰᴏʀᴍᴀᴛ : /set_tutorial <code>https://t.me/LazyTutorialLink/23</code></b>")
+
+@Client.on_message(filters.command("remove_tutorial"))
+async def removetutorial(bot, message):
+    userid = message.from_user.id if message.from_user else None
+    if not userid:
+        return await message.reply(f"I did'nt recognise you as an admin. Please Try Again")
+    chat_type = message.chat.type
+    if chat_type == enums.ChatType.PRIVATE:
+        return await message.reply_text("This command only works in group !")
+    elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+        grpid = message.chat.id
+        title = message.chat.title
+    else:
+        return
+    userid = message.from_user.id
+    user = await bot.get_chat_member(grpid, userid)
+    if user.status != enums.ChatMemberStatus.ADMINISTRATOR and user.status != enums.ChatMemberStatus.OWNER and str(userid) not in ADMINS:
+        return
+    else:
+        pass
+    reply = await message.reply_text("<b>ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ...</b>")
+    await save_group_settings(grpid, 'is_tutorial', False)
+    await reply.edit_text(f"<b>Tutorial link removed ✔</b>")

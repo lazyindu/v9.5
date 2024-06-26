@@ -1,7 +1,7 @@
 # https://github.com/odysseusmax/animated-lamp/blob/master/bot/database/database.py
 import motor.motor_asyncio
 import datetime
-from info import DATABASE_NAME, DATABASE_URI, IMDB, IMDB_TEMPLATE, MELCOW_NEW_USERS, P_TTI_SHOW_OFF, SINGLE_BUTTON, SPELL_CHECK_REPLY, PROTECT_CONTENT, MAX_BTN, URL_MODE
+from info import DATABASE_NAME, DATABASE_URI, IMDB, IMDB_TEMPLATE, MELCOW_NEW_USERS, P_TTI_SHOW_OFF, SINGLE_BUTTON, SPELL_CHECK_REPLY, PROTECT_CONTENT, MAX_BTN, URL_MODE, TUTORIAL, IS_TUTORIAL
 
 class Database:
     
@@ -12,7 +12,7 @@ class Database:
         self.grp = self.db.groups
         self.users = self.db.uersz
         self.req = self.db.requests
-        
+
     async def find_join_req(self, id):
         return bool(await self.req.find_one({'id': id}))
         
@@ -155,7 +155,9 @@ class Database:
             'welcome': MELCOW_NEW_USERS,
             'template': IMDB_TEMPLATE,
             'max_btn': MAX_BTN,
-            'url_mode': URL_MODE
+            'url_mode': URL_MODE,
+            'tutorial': TUTORIAL,
+            'is_tutorial': IS_TUTORIAL
 
         }
         chat = await self.grp.find_one({'id':int(id)})
