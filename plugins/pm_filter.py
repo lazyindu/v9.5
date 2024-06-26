@@ -35,7 +35,7 @@ from Script import script
 import humanize
 from PIL import Image
 import time
-from utils import get_shortlink
+from utils import get_shortlink, send_all
 from database.filters_mdb import (
     del_all,
     find_filter,
@@ -1735,7 +1735,35 @@ async def cb_handler(client: Client, query: CallbackQuery):
         except Exception as e:
             logger.exception(e)
             await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start=sendfiles4_{key}")
-
+    # elif query.data.startswith("send_fsall"):
+    #     temp_var, ident, key, offset = query.data.split("#")
+    #     search = BUTTON0.get(key)
+    #     if not search:
+    #         await query.answer(script.OLD_ALRT_TXT.format(query.from_user.first_name),show_alert=True)
+    #         return
+    #     files, n_offset, total = await get_search_results_badAss_LazyDeveloperr(query.message.chat.id, search, offset=int(offset), filter=True)
+    #     await send_all(client, query.from_user.id, files, ident, query.message.chat.id, query.from_user.first_name, query)
+    #     search = BUTTONS1.get(key)
+    #     files, n_offset, total = await get_search_results_badAss_LazyDeveloperr(query.message.chat.id, search, offset=int(offset), filter=True)
+    #     await send_all(client, query.from_user.id, files, ident, query.message.chat.id, query.from_user.first_name, query)
+    #     search = BUTTONS2.get(key)
+    #     files, n_offset, total = await get_search_results_badAss_LazyDeveloperr(query.message.chat.id, search, offset=int(offset), filter=True)
+    #     await send_all(client, query.from_user.id, files, ident, query.message.chat.id, query.from_user.first_name, query)
+    #     await query.answer(f"ʜᴇʏ {query.from_user.first_name}, ᴀʟʟ ꜰɪʟᴇꜱ ᴏɴ ᴛʜɪꜱ ᴘᴀɢᴇ ʜᴀꜱ ʙᴇᴇɴ ꜱᴇɴᴛ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴛᴏ ʏᴏᴜ ʙʏ ᴅᴍ !", show_alert=True)
+        
+    # elif query.data.startswith("send_fall"):
+    #     temp_var, ident, key, offset = query.data.split("#")
+    #     if BUTTONS.get(key)!=None:
+    #         search = BUTTONS.get(key)
+    #     else:
+    #         search = FRESH.get(key)
+    #     if not search:
+    #         await query.answer(script.OLD_ALRT_TXT.format(query.from_user.first_name),show_alert=True)
+    #         return
+    #     files, n_offset, total = await get_search_results_badAss_LazyDeveloperr(query.message.chat.id, search, offset=int(offset), filter=True)
+    #     await send_all(client, query.from_user.id, files, ident, query.message.chat.id, query.from_user.first_name, query)
+    #     await query.answer(f"ʜᴇʏ {query.from_user.first_name}, ᴀʟʟ ꜰɪʟᴇꜱ ᴏɴ ᴛʜɪꜱ ᴘᴀɢᴇ ʜᴀꜱ ʙᴇᴇɴ ꜱᴇɴᴛ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴛᴏ ʏᴏᴜ ʙʏ ᴅᴍ !", show_alert=True)
+      
     elif query.data.startswith("del"):
         ident, file_id = query.data.split("#")
         files_ = await get_file_details(file_id)
