@@ -35,7 +35,7 @@ from Script import script
 import humanize
 from PIL import Image
 import time
-from utils import get_shortlink, send_all
+from utils import get_shortlink
 from database.filters_mdb import (
     del_all,
     find_filter,
