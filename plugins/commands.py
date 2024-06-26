@@ -11,6 +11,13 @@ from database.users_chats_db import db
 from info import *
 from utils import get_settings, get_size, is_subscribed, save_group_settings, temp
 from database.connections_mdb import active_connection
+import pytz
+import datetime
+from utils import get_seconds
+from database.users_chats_db import db 
+from pyrogram import Client, filters 
+from pyrogram.errors.exceptions.bad_request_400 import MessageTooLong
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 import re
 import json
 import base64
@@ -347,7 +354,7 @@ async def start(client, message):
     await lzzz.edit_text("<b>ʏᴏᴜʀ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ɪꜱ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ !!\n\nᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ʏᴏᴜʀ ᴅᴇʟᴇᴛᴇᴅ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ 👇</b>",reply_markup=InlineKeyboardMarkup(btnl))
 
 
-@Client.on_message(filters.command('channel') & filters.user(ADMINS))
+@Client.on_message(filters.command('channels') & filters.user(ADMINS))
 async def channel_info(bot, message):
            
     """Send basic information of channel"""
@@ -377,7 +384,6 @@ async def channel_info(bot, message):
         await message.reply_document(file)
         os.remove(file)
  
-
 @Client.on_message(filters.command('logs') & filters.user(ADMINS))
 async def log_file(bot, message):
     """Send log file"""
@@ -433,7 +439,6 @@ async def delete(bot, message):
             else:
                 await msg.edit('File not found in database')
 
-
 @Client.on_message(filters.command('deleteall') & filters.user(ADMINS))
 async def delete_all_index(bot, message):
     await message.reply_text(
@@ -455,13 +460,11 @@ async def delete_all_index(bot, message):
         quote=True,
     )
 
-
 @Client.on_callback_query(filters.regex(r'^autofilter_delete'))
 async def delete_all_index_confirm(bot, message):
     await Media.collection.drop()
     await message.answer('♥️ Thank You LazyDeveloper ♥️')
     await message.message.edit('Succesfully Deleted All The Indexed Files.')
-
 
 @Client.on_message(filters.command('settings'))
 async def settings(client, message):
@@ -644,8 +647,6 @@ async def settings(client, message):
             reply_to_message_id=message.id
         )
 
-
-
 @Client.on_message(filters.command('set_template'))
 async def save_template(client, message):
     sts = await message.reply("Checking template")
@@ -688,3 +689,140 @@ async def save_template(client, message):
     template = message.text.split(" ", 1)[1]
     await save_group_settings(grp_id, 'template', template)
     await sts.edit(f"Successfully changed template for {title} to\n\n{template}")
+
+@Client.on_message(filters.command("add_prime") & filters.user(ADMINS))
+async def add_prime_status(client, message):
+    if len(message.command) == 4:
+        time_zone = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+        current_time = time_zone.strftime("%d-%m-%Y\n⏱️ Joining time : %I:%M:%S %p") 
+        user_id = int(message.command[1])  # Convert the user_id to integer
+        user = await client.get_users(user_id)
+        time = message.command[2]+" "+message.command[3]
+        seconds = await get_seconds(time)
+        if seconds > 0:
+            expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
+            user_data = {"id": user_id, "expiry_time": expiry_time}  # Using "id" instead of "user_id"  
+            await db.update_user(user_data)  # Use the update_user method to update or insert user data
+            data = await db.get_user(user_id)
+            expiry = data.get("expiry_time")   
+            expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")         
+            await message.reply_text(f"{user.mention} Added to Prime list ✅\n\n👤 Name : {user.mention}\n⚡ ID : <code>{user_id}</code>\n⏰ Limit : <code>{time}</code>\n\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True)
+            await client.send_message(
+                chat_id=user_id,
+                text=f"👋 ʜᴇʏ {user.mention},\nThank you for purchasing prime membership.\n\n⏰ LIMIT : <code>{time}</code>\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True              
+            )
+            await client.send_message(PRIME_MEMBERS_LOGS, text=f"#New Prime member \n\n👤 Name : {user.mention}\n⚡ ID : <code>{user_id}</code>\n⏰ LIMIT : <code>{time}</code>\n\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True)
+
+        else:
+            await message.reply_text("Invalid time format. Please use '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year'")
+    else:
+        await message.reply_text("Usage : /add_prime user_id time (e.g., '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year')")
+
+@Client.on_message(filters.command("remove_prime") & filters.user(ADMINS))
+async def remove_prime_state(client, message):
+    if len(message.command) == 2:
+        user_id = int(message.command[1])  # Convert the user_id to integer
+        user = await client.get_users(user_id)
+        if await db.remove_prime_status(user_id):
+            await message.reply_text("User removed  successfully! ✔")
+            await client.send_message(
+                chat_id=user_id,
+                text=f"<b>ʜᴇʏ {user.mention},\n\nʏᴏᴜʀ ᴘʀɪᴍᴇ ᴀᴄᴄᴇss ʜᴀs ʙᴇᴇɴ ʀᴇᴍᴏᴠᴇᴅ.\nᴛʜᴀɴᴋ ʏᴏᴜ ꜰᴏʀ ᴜsɪɴɢ ᴏᴜʀ sᴇʀᴠɪᴄᴇ 😊\nᴄʟɪᴄᴋ ᴏɴ /plan ᴛᴏ ᴄʜᴇᴄᴋ ᴏᴜᴛ ᴏᴛʜᴇʀ ᴘʟᴀɴꜱ.</b>"
+            )
+        else:
+            await message.reply_text("ᴜɴᴀʙʟᴇ ᴛᴏ ʀᴇᴍᴏᴠᴇ ᴜꜱᴇʀ !\nᴀʀᴇ ʏᴏᴜ ꜱᴜʀᴇ, ɪᴛ ᴡᴀꜱ ᴀ ᴘʀɪᴍᴇ ᴜꜱᴇʀ ɪᴅ ?")
+    else:
+        await message.reply_text("ᴜꜱᴀɢᴇ : /remove_prime user_id") 
+
+@Client.on_message(filters.command("get_prime") & filters.user(ADMINS))
+async def get_prime_status(client, message):
+    if len(message.command) == 2:
+        user_id = int(message.command[1])
+        user = await client.get_users(user_id)
+        data = await db.get_user(user_id)  # Convert the user_id to integer
+        if data and data.get("expiry_time"):
+            #expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=data)
+            expiry = data.get("expiry_time") 
+            expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
+            expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")            
+            # Calculate time difference
+            current_time = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+            time_left = expiry_ist - current_time
+            
+            # Calculate days, hours, and minutes
+            days = time_left.days
+            hours, remainder = divmod(time_left.seconds, 3600)
+            minutes, seconds = divmod(remainder, 60)
+            
+            # Format time left as a string
+            time_left_str = f"{days} days, {hours} hours, {minutes} minutes"
+            await message.reply_text(f"⚜️ ᴘʀɪᴍᴇ ᴜꜱᴇʀ ᴅᴀᴛᴀ :\n\n👤 ᴜꜱᴇʀ : {user.mention}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\n⏰ ᴛɪᴍᴇ ʟᴇꜰᴛ : {time_left_str}\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}")
+        else:
+            await message.reply_text("ɴᴏ ᴀɴʏ ᴘʀɪᴍᴇ ᴅᴀᴛᴀ ᴡᴀꜱ ꜰᴏᴜɴᴅ ɪɴ ᴅᴀᴛᴀʙᴀꜱᴇ !")
+    else:
+        await message.reply_text("ᴜꜱᴀɢᴇ : /get_prime user_id")
+
+@Client.on_message(filters.command("prime_users") & filters.user(ADMINS))
+async def prime_user(client, message):
+    aa = await message.reply_text("<i>Please wait...</i>")
+    new = f"⚜️ ᴘʀɪᴍᴇ ᴜꜱᴇʀꜱ ʟɪꜱᴛ :\n\n"
+    user_count = 1
+    users = await db.get_all_users()
+    async for user in users:
+        data = await db.get_user(user['id'])
+        if data and data.get("expiry_time"):
+            expiry = data.get("expiry_time") 
+            expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
+            expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")            
+            current_time = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+            time_left = expiry_ist - current_time
+            days = time_left.days
+            hours, remainder = divmod(time_left.seconds, 3600)
+            minutes, seconds = divmod(remainder, 60)
+            time_left_str = f"{days} days, {hours} hours, {minutes} minutes"	 
+            new += f"{user_count}. {(await client.get_users(user['id'])).mention}\n👤 ᴜꜱᴇʀ ɪᴅ : {user['id']}\n⏳ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}\n⏰ ᴛɪᴍᴇ ʟᴇꜰᴛ : {time_left_str}\n"
+            user_count += 1
+        else:
+            pass
+    try:    
+        await aa.edit_text(new)
+    except MessageTooLong:
+        with open('usersplan.txt', 'w+') as outfile:
+            outfile.write(new)
+        await message.reply_document('usersplan.txt', caption="Paid Users:")
+
+@Client.on_message(filters.command("myplan"))
+async def myplan(client, message):
+    user = message.from_user.mention 
+    user_id = message.from_user.id
+    data = await db.get_user(message.from_user.id)  # Convert the user_id to integer
+    if data and data.get("expiry_time"):
+        #expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=data)
+        expiry = data.get("expiry_time") 
+        expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
+        expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")            
+        # Calculate time difference
+        current_time = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+        time_left = expiry_ist - current_time
+            
+        # Calculate days, hours, and minutes
+        days = time_left.days
+        hours, remainder = divmod(time_left.seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+            
+        # Format time left as a string
+        time_left_str = f"{days} ᴅᴀʏꜱ, {hours} ʜᴏᴜʀꜱ, {minutes} ᴍɪɴᴜᴛᴇꜱ"
+        await message.reply_text(f"⚜️ ᴘʀɪᴍᴇ ᴜꜱᴇʀ ᴅᴀᴛᴀ :\n\n👤 Name : {user}\n⚡ ID : <code>{user_id}</code>\n⏰ Time Left : {time_left_str}\n⌛️ Exp Date : {expiry_str_in_ist}")   
+    else:
+        await message.reply_text(f"ʜᴇʏ {user},\n\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴀɴʏ ᴀᴄᴛɪᴠᴇ ᴘʀɪᴍᴇ ᴘʟᴀɴs, ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴛᴀᴋᴇ ᴘʀɪᴍᴇ ᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ 👇",
+	reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("💸 ᴄʜᴇᴄᴋᴏᴜᴛ ᴘʀɪᴍᴇ ᴘʟᴀɴꜱ 💸", callback_data='seeplans')]]))			 
+
+@Client.on_message(filters.command("plan"))
+async def plan(client, message):
+    user_id = message.from_user.id 
+    users = message.from_user.mention 
+    btn = [[
+	
+        InlineKeyboardButton("📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ ʜᴇʀᴇ", user_id=int(5965340120))],[InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")
+    ]]
+    await message.reply_photo(photo="https://graph.org/file/55a5392f88ec5a4bd3379.jpg", caption=script.PREMIUM_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(btn))

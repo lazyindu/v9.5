@@ -132,16 +132,17 @@ python3 bot.py
 ## Credits 
 * [![LazyPrincess-Devs](https://img.shields.io/static/v1?label=LazyPrincess&message=devs&color=critical)](https://telegram.dog/LazyDeveloper)
 
-
 ## Thanks to 
- - Thank you [LazyDeveloper](https://github.com/LazyDeveloperr) for helping us in this journey ❤
- - Thank you [LazyDeveloper](https://github.com/LazyDeveloperr) for adding amazing `url uploadig feature` 🎉
- - Thank you [LazyDeveloper](https://github.com/LazyDeveloperr) for adding `online file streaming feature` 🎉
- - Thank you [LazyDeveloper](https://github.com/LazyDeveloperr) for adding `file renaming feature` 🎉
- - Thank you [LazyDeveloper](https://github.com/LazyDeveloperr) for keeping this `super premium repo` for `free` ❤
+ - Thank you [LazyDeveloper](https://github.com/LazyDeveloperr) for adding amazing `url uploadig feature`, `online file streaming feature`, `file renaming feature` and keeping this `super premium repo` for `free` ❤ . Great Thanks to [LazyDeveloper](https://github.com/LazyDeveloperr) for helping us in this journey ❤
+ - Thanks To Dan For His Awesome [Library](https://github.com/pyrogram/pyrogram)
  - Thanks To Dan For His Awesome [Library](https://github.com/pyrogram/pyrogram)
  - Thanks To Mahesh For His Awesome [Media-Search-bot](https://github.com/Mahesh0253/Media-Search-bot)
  - Thanks To [Trojanz](https://github.com/trojanzhex) for Their Awesome [Unlimited Filter Bot](https://github.com/TroJanzHEX/Unlimited-Filter-Bot) And [AutoFilterBoT](https://github.com/trojanzhex/auto-filter-bot)
+ - Thanks To Gangster Baby Repo for rename feature.
+ - Thanks to Adarsh for file-to-link repo.
+ - Thanks to TG@SiliconOfficial for sharing me Cute_Repo to improve LazyPrincess.
+ - Thanks TO TG@Rk_botowner 
+ - Thanks TO TG@DeletedFromEarth
  - Thanks To All Everyone In This Journey
 
 ### Note
