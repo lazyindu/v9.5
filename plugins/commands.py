@@ -504,7 +504,12 @@ async def settings(client, message):
     if settings is not None:
         if message.from_user.id in ADMINS:
             buttons = [
-            [
+                [
+                    InlineKeyboardButton('URL Mode',
+                                         callback_data=f'setgs#url_mode#{settings["url_mode"]}#{str(grp_id)}'),
+                    InlineKeyboardButton('✅ Yes' if settings["url_mode"] else '❌ No',
+                                         callback_data=f'setgs#url_mode#{settings["url_mode"]}#{str(grp_id)}')
+                ],[
                 InlineKeyboardButton(
                     'Filter Button',
                     callback_data=f'setgs#button#{settings["button"]}#{grp_id}',
