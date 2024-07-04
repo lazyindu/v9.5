@@ -260,6 +260,7 @@ async def start(client, message):
         return
          
     elif data.startswith("all"):
+        print('Help ! i am hit')
         files = temp.GETALL.get(file_id)
         if not files:
             return await message.reply('<b><i>ɴᴏ ꜱᴜᴄʜ ꜰɪʟᴇ ᴇxɪꜱᴛꜱ !</b></i>')
