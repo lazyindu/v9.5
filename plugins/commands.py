@@ -827,7 +827,6 @@ async def prime_user(client, message):
         logging.error(f"Error editing message: {e}")
         await aa.edit_text("Failed to send the user list.")
 
-
 # @Client.on_message(filters.command("prime_users") & filters.user(ADMINS))
 # async def prime_user(client, message):
 #     aa = await message.reply_text("<i>Please wait...</i>")

@@ -53,7 +53,6 @@ Read [this](https://telegram.dog/LazyDevelopers/8) before you start messing up w
 * `LAZY_GROUPS`: IDs of the groups where you don't want bot to use url. Separate multiple ids by space
 * `MY_USERS`: ID of the users to which you want to give file sharing authentication for private files. Separate multiple ids by space.
 * `FQDN`: Domain name of your currently deployed bot.
-* `PRIME_DOWNLOADERS`: ID of the users to which you want to give file uploading using url. Separate multiple ids by space.
 
 
 * Check [info.py](https://github.com/LazyDeveloperr/LazyPrincess/blob/master/info.py) for more
