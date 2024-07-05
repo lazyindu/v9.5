@@ -799,7 +799,6 @@ async def prime_user(client, message):
         try:
             data = await db.get_user(user['id'])
             logging.debug(f"Fetched data for user {user['id']}: {data}")
-            
             if data and data.get("expiry_time"):
                 expiry = data.get("expiry_time")
                 expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
