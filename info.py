@@ -130,8 +130,6 @@ else:
 BANNED_CHANNELS = list(set(int(x) for x in str(getenv("BANNED_CHANNELS", "-1001987654567")).split())) 
 OWNER_USERNAME = "LazyDeveloper"
 
-lazydownloaders = [int(lazydownloaders) if id_pattern.search(lazydownloaders) else lazydownloaders for lazydownloaders in environ.get('PRIME_DOWNLOADERS', '').split()]
-PRIME_DOWNLOADERS = (lazydownloaders) if lazydownloaders else []
 
 # URL UPLOADING
 BANNED_USERS = set(int(x) for x in environ.get("BANNED_USERS", "").split())

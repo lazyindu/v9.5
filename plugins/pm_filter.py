@@ -235,8 +235,8 @@ async def next_page(bot, query):
         #     # create a new entry for the user in the download counts dictionary
         #     download_counts[query.from_user.id] = {'date': current_date, 'count': 1}d
     if settings['button']:
-            if URL_MODE is True:
-                if query.from_user.id in ADMINS:
+            if settings["url_mode"]:
+                if query.from_user.id in ADMINS or MY_USERS or LZURL_PRIME_USERS or await db.has_prime_status(query.from_user.id):
                     btn = [
                         [
                             InlineKeyboardButton(
@@ -245,24 +245,6 @@ async def next_page(bot, query):
                         ]
                         for file in files
                     ]
-                elif query.from_user.id in MY_USERS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(
-                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
-                            ),
-                        ]
-                        for file in files
-                    ]
-                elif query.from_user.id in LZURL_PRIME_USERS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(
-                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
-                            ),
-                        ]
-                        for file in files
-                        ]
                 elif query.message.chat.id is not None and query.message.chat.id in LAZY_GROUPS:
                     btn = [
                     [
@@ -283,53 +265,18 @@ async def next_page(bot, query):
                         for file in files
                     ]
             else:
-                if query.from_user.id in ADMINS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(
-                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
-                            ),
-                        ]
-                        for file in files
+                btn = [
+                    [
+                        InlineKeyboardButton(
+                            text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
+                        ),
                     ]
-                elif query.from_user.id in MY_USERS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(
-                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
-                            ),
-                        ]
-                        for file in files
-                    ]
-                else:    
-                    btn = [
-                        [
-                            InlineKeyboardButton(
-                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
-                            ),
-                        ]
-                        for file in files
-                    ]
+                    for file in files
+                ]
 
     else:
-        if URL_MODE is True:
-            if query.from_user.id in ADMINS:
-                btn = [
-                    [
-                        InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                        InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                    ]
-                    for file in files
-                ]
-            elif query.from_user.id in MY_USERS:
-                btn = [
-                    [
-                        InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                        InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                    ]
-                    for file in files
-                ]
-            elif query.from_user.id in LZURL_PRIME_USERS:
+        if settings["url_mode"]:
+            if query.from_user.id in ADMINS or MY_USERS or LZURL_PRIME_USERS or await db.has_prime_status(query.from_user.id):
                 btn = [
                     [
                         InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
@@ -354,24 +301,7 @@ async def next_page(bot, query):
                     for file in files
                 ]
         else:
-            if query.form_user.id in ADMINS:
-                btn = [
-                    [
-                        InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                        InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                    ]
-                    for file in files
-                ]
-            elif query.form_user.id in MY_USERS:
-                btn = [
-                    [
-                        InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                        InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                    ]
-                    for file in files
-                ]
-            else:
-                btn = [
+            btn = [
                     [
                         InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
                         InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
@@ -546,8 +476,8 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
             #     ]
             #     for file in files
             # ]
-            if URL_MODE is True:
-                if message.from_user.id in ADMINS:
+            if settings["url_mode"]:
+                if message.from_user.id in ADMINS or MY_USERS:
                     btn = [
                         [
                             InlineKeyboardButton(
@@ -556,16 +486,7 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
                         ]
                         for file in files
                     ]
-                elif message.from_user.id in MY_USERS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(
-                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
-                            ),
-                        ]
-                        for file in files
-                    ]
-                elif message.from_user.id in LZURL_PRIME_USERS:
+                elif message.from_user.id in LZURL_PRIME_USERS or await db.has_prime_status(message.from_user.id):
                     btn = [
                         [
                             InlineKeyboardButton(
@@ -594,16 +515,7 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
                         for file in files
                     ]
             else:
-                if message.from_user.id in ADMINS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(
-                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
-                            ),
-                        ]
-                        for file in files
-                    ]
-                elif message.from_user.id in MY_USERS:
+                if message.from_user.id in ADMINS or MY_USERS:
                     btn = [
                         [
                             InlineKeyboardButton(
@@ -623,24 +535,8 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
                     ]
 
         else:
-            if URL_MODE is True:
-                if query.from_user.id in ADMINS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                            InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                        ]
-                        for file in files
-                    ]
-                elif query.from_user.id in MY_USERS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                            InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                        ]
-                        for file in files
-                    ]
-                elif query.from_user.id in LZURL_PRIME_USERS:
+            if settings["url_mode"]:
+                if query.from_user.id in ADMINS or MY_USERS or LZURL_PRIME_USERS or await db.has_prime_status(query.from_user.id):
                     btn = [
                         [
                             InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
@@ -665,24 +561,7 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
                         for file in files
                     ]
             else:
-                if query.form_user.id in ADMINS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                            InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                        ]
-                        for file in files
-                    ]
-                elif query.form_user.id in MY_USERS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                            InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                        ]
-                        for file in files
-                    ]
-                else:
-                    btn = [
+                btn = [
                         [
                             InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
                             InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
@@ -850,8 +729,8 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
             #     ]
             #     for file in files
             # ]
-            if URL_MODE is True:
-                if message.from_user.id in ADMINS:
+            if settings["url_mode"]:
+                if message.from_user.id in ADMINS or MY_USERS:
                     btn = [
                         [
                             InlineKeyboardButton(
@@ -860,16 +739,7 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
                         ]
                         for file in files
                     ]
-                elif message.from_user.id in MY_USERS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(
-                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
-                            ),
-                        ]
-                        for file in files
-                    ]
-                elif message.from_user.id in LZURL_PRIME_USERS:
+                elif message.from_user.id in LZURL_PRIME_USERS or await db.has_prime_status(message.from_user.id):
                     btn = [
                         [
                             InlineKeyboardButton(
@@ -898,16 +768,7 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
                         for file in files
                     ]
             else:
-                if message.from_user.id in ADMINS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(
-                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
-                            ),
-                        ]
-                        for file in files
-                    ]
-                elif message.from_user.id in MY_USERS:
+                if message.from_user.id in ADMINS or MY_USERS:
                     btn = [
                         [
                             InlineKeyboardButton(
@@ -927,24 +788,8 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
                     ]
 
         else:
-            if URL_MODE is True:
-                if query.from_user.id in ADMINS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                            InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                        ]
-                        for file in files
-                    ]
-                elif query.from_user.id in MY_USERS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                            InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                        ]
-                        for file in files
-                    ]
-                elif query.from_user.id in LZURL_PRIME_USERS:
+            if settings["url_mode"]:
+                if query.from_user.id in ADMINS or MY_USERS or LZURL_PRIME_USERS or await db.has_prime_status(query.from_user.id):
                     btn = [
                         [
                             InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
@@ -969,24 +814,7 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
                         for file in files
                     ]
             else:
-                if query.form_user.id in ADMINS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                            InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                        ]
-                        for file in files
-                    ]
-                elif query.form_user.id in MY_USERS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                            InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                        ]
-                        for file in files
-                    ]
-                else:
-                    btn = [
+                btn = [
                         [
                             InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
                             InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
@@ -1126,8 +954,8 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
             #     ]
             #     for file in files
             # ]
-            if URL_MODE is True:
-                if message.from_user.id in ADMINS:
+            if settings["url_mode"]:
+                if message.from_user.id in ADMINS or MY_USERS:
                     btn = [
                         [
                             InlineKeyboardButton(
@@ -1136,16 +964,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
                         ]
                         for file in files
                     ]
-                elif message.from_user.id in MY_USERS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(
-                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
-                            ),
-                        ]
-                        for file in files
-                    ]
-                elif message.from_user.id in LZURL_PRIME_USERS:
+                elif message.from_user.id in LZURL_PRIME_USERS or await db.has_prime_status(message.from_user.id):
                     btn = [
                         [
                             InlineKeyboardButton(
@@ -1174,16 +993,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
                         for file in files
                     ]
             else:
-                if message.from_user.id in ADMINS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(
-                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
-                            ),
-                        ]
-                        for file in files
-                    ]
-                elif message.from_user.id in MY_USERS:
+                if message.from_user.id in ADMINS or MY_USERS:
                     btn = [
                         [
                             InlineKeyboardButton(
@@ -1203,24 +1013,8 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
                     ]
 
         else:
-            if URL_MODE is True:
-                if query.from_user.id in ADMINS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                            InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                        ]
-                        for file in files
-                    ]
-                elif query.from_user.id in MY_USERS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                            InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                        ]
-                        for file in files
-                    ]
-                elif query.from_user.id in LZURL_PRIME_USERS:
+            if settings["url_mode"]:
+                if query.from_user.id in ADMINS or MY_USERS or LZURL_PRIME_USERS or await db.has_prime_status(query.from_user.id):
                     btn = [
                         [
                             InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
@@ -1245,24 +1039,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
                         for file in files
                     ]
             else:
-                if query.form_user.id in ADMINS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                            InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                        ]
-                        for file in files
-                    ]
-                elif query.form_user.id in MY_USERS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                            InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                        ]
-                        for file in files
-                    ]
-                else:
-                    btn = [
+                btn = [
                         [
                             InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
                             InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
@@ -1705,7 +1482,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ident, key = query.data.split("#")
         settings = await get_settings(query.message.chat.id)
         try:
-            if settings['url_mode'] and user not in PRIME_USERS:
+            if settings['url_mode'] and not await db.has_prime_status(user):
                 await query.answer(url=f"https://telegram.me/{temp.U_NAME}?start=sendfiles1_{key}")
                 return
             else:
@@ -2388,7 +2165,7 @@ async def auto_filter(client, msg, spoll=False):
     temp.SHORT[message.from_user.id] = message.chat.id
     if settings["button"]:
             if settings["url_mode"]:
-                if message.from_user.id in ADMINS:
+                if message.from_user.id in ADMINS or MY_USERS:
                     btn = [
                         [
                             InlineKeyboardButton(
@@ -2397,15 +2174,15 @@ async def auto_filter(client, msg, spoll=False):
                         ]
                         for file in files
                     ]
-                elif message.from_user.id in MY_USERS:
+                elif message.from_user.id in LZURL_PRIME_USERS or await db.has_prime_status(message.from_user.id):
                     btn = [
                         [
                             InlineKeyboardButton(
-                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
+                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'{pre}#{file.file_id}'
                             ),
                         ]
                         for file in files
-                    ]
+                        ]
                 elif message.from_user.id in LZURL_PRIME_USERS:
                     btn = [
                         [
@@ -2435,16 +2212,7 @@ async def auto_filter(client, msg, spoll=False):
                         for file in files
                     ]
             else:
-                if message.from_user.id in ADMINS:
-                    btn = [
-                        [
-                            InlineKeyboardButton(
-                                text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
-                            ),
-                        ]
-                        for file in files
-                    ]
-                elif message.from_user.id in MY_USERS:
+                if message.from_user.id in ADMINS or MY_USERS:
                     btn = [
                         [
                             InlineKeyboardButton(
@@ -2465,7 +2233,7 @@ async def auto_filter(client, msg, spoll=False):
 
     else:
         if settings["url_mode"]:
-            if message.from_user.id in ADMINS:
+            if message.from_user.id in ADMINS or MY_USERS:
                 btn = [
                     [
                         InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
@@ -2473,15 +2241,7 @@ async def auto_filter(client, msg, spoll=False):
                     ]
                     for file in files
                 ]
-            elif message.from_user.id in MY_USERS:
-                btn = [
-                    [
-                        InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                        InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                    ]
-                    for file in files
-                ]
-            elif message.from_user.id in LZURL_PRIME_USERS:
+            elif message.from_user.id in LZURL_PRIME_USERS or await db.has_prime_status(message.from_user.id):
                 btn = [
                     [
                         InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'{pre}#{file.file_id}',),
@@ -2506,15 +2266,7 @@ async def auto_filter(client, msg, spoll=False):
                     for file in files
                 ]
         else:
-            if message.form_user.id in ADMINS:
-                btn = [
-                    [
-                        InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
-                        InlineKeyboardButton(text=f"{get_size(file.file_size)}",callback_data=f'files#{file.file_id}',),
-                    ]
-                    for file in files
-                ]
-            elif message.form_user.id in MY_USERS:
+            if message.form_user.id in ADMINS or MY_USERS:
                 btn = [
                     [
                         InlineKeyboardButton(text=f"{file.file_name}",callback_data=f'files#{file.file_id}',),
