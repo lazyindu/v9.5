@@ -28,7 +28,7 @@ async def start(client, message):
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
         buttons = [
             [
-                InlineKeyboardButton('🔍 Sᴇᴀʀᴄʜ 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​ 📈', url='https://t.me/+tl1Ll8L8TbQwMjdl')
+                InlineKeyboardButton('🔍 Search Group​​​​​ 📈', url='https://t.me/+tl1Ll8L8TbQwMjdl')
             ],
             [
                 InlineKeyboardButton('🙆🏻 Hᴇʟᴘ 🦾', url=f"https://t.me/{temp.U_NAME}?start=help"),
@@ -57,7 +57,7 @@ async def start(client, message):
             InlineKeyboardButton('↖️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ↗️', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
             ],[
             InlineKeyboardButton('🧞‍♀️ Sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
-            InlineKeyboardButton('🔍 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​', url='https://t.me/+tl1Ll8L8TbQwMjdl')
+            InlineKeyboardButton('🔍 Gʀᴏᴜᴘ', url='https://t.me/+tl1Ll8L8TbQwMjdl')
             ],[
             InlineKeyboardButton('🙆🏻 Hᴇʟᴘ ', callback_data='help'),
             InlineKeyboardButton('🎁 Hᴇʟᴘ++', callback_data='leech_url_help'),
@@ -115,7 +115,7 @@ async def start(client, message):
             InlineKeyboardButton('↖️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ↗️', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
             ],[
             InlineKeyboardButton('🧞‍♀️ Sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
-            InlineKeyboardButton('🔍 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​', url='https://t.me/+tl1Ll8L8TbQwMjdl')
+            InlineKeyboardButton('🔍 Gʀᴏᴜᴘ', url=f'https://t.me/+tl1Ll8L8TbQwMjdl')
             ],[
             InlineKeyboardButton('🙆🏻 Hᴇʟᴘ', callback_data='help'),
             InlineKeyboardButton('🎁 Hᴇʟᴘ++ ', callback_data='leech_url_help'),

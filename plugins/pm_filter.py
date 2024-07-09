@@ -14,6 +14,7 @@ import ast
 import math
 import pytz
 import random
+from urllib.parse import quote
 from datetime import datetime, timedelta, date, time
 lock = asyncio.Lock()
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
@@ -1661,7 +1662,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('↖️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ↗️', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
         ], [
             InlineKeyboardButton('🧞‍♀️ Sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
-                InlineKeyboardButton('🔍 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​', url='https://t.me/+tl1Ll8L8TbQwMjdl')
+                InlineKeyboardButton('🔍 Gʀᴏᴜᴘ', url='https://t.me/+tl1Ll8L8TbQwMjdl')
         ], [
             InlineKeyboardButton('🙆🏻 Hᴇʟᴘ 🦾', callback_data='help'),
             InlineKeyboardButton('🎁 Hᴇʟᴘ++', callback_data='leech_url_help'),
@@ -1699,7 +1700,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "about":
         buttons = [[
-                InlineKeyboardButton('🔍 Sᴇᴀʀᴄʜ 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​ 📈', url='https://t.me/+tl1Ll8L8TbQwMjdl'),
+                InlineKeyboardButton('🔍 Search Group​​​​​ 📈', url='https://t.me/+tl1Ll8L8TbQwMjdl'),
             InlineKeyboardButton('♥️ Source', callback_data='source')
         ], [
             InlineKeyboardButton('🏠 Home', callback_data='start'),
@@ -2423,6 +2424,11 @@ async def auto_filter(client, msg, spoll=False):
             search = re.sub(r"\s+", " ", search).strip()
             search = search.replace("-", " ")
             search = search.replace(":","")
+            # Sample user message
+            searched_request = message.from_user.text
+            # Generate the search URL
+            generated_link = f"https://google.com/search?q={quote(searched_request)}"
+
             files, offset, total_results = await get_search_results_badAss_LazyDeveloperr(message.chat.id ,search, offset=0, filter=True)
             if not files:
                 await client.send_message(req_channel,f"-🦋 #REQUESTED_CONTENT 🦋-\n\n📝**Content Name** :`{search}`\n**Requested By**: {message.from_user.first_name}\n **USER ID**:{user_id}\n\n🗃️",
@@ -2434,7 +2440,7 @@ async def auto_filter(client, msg, spoll=False):
                                                                                                                                         [InlineKeyboardButton("❌Reject Req", callback_data=f"notify_user_req_rejected:{user_id}:{requested_movie}")]
                                                                                                                                         ]))
                 
-                l = await message.reply_text(text=f"△ HeY `{message.from_user.first_name}` 😎,\n\nI couldn't find anything related to your request. 🤧\nTry reading the instructions below 👇",
+                l = await message.reply_text(text=f"△ HeY `{message.from_user.first_name}` 🥰,\nI ᴄᴏᴜʟᴅɴ'ᴛ ғɪɴᴅ ᴀɴʏᴛʜɪɴɢ ʀᴇʟᴀᴛᴇᴅ ᴛᴏ ʏᴏᴜʀ ʀᴇᴏ̨ᴜᴇsᴛ.🤧\nTʀʏ ʀᴇᴀᴅɪɴɢ ᴛʜᴇ ɪɴsᴛʀᴜᴄᴛɪᴏɴs ʙᴇʟᴏᴡ 👇",
                                                                                                        reply_markup=InlineKeyboardMarkup([
                                                                                                                                         [ InlineKeyboardButton("HIN", callback_data="read_in_hin"),
                                                                                                                                           InlineKeyboardButton("ENG", callback_data="read_in_eng"),
@@ -2445,7 +2451,7 @@ async def auto_filter(client, msg, spoll=False):
                                                                                                                                           InlineKeyboardButton("Sanskrit", callback_data="read_in_san"),
                                                                                                                                           InlineKeyboardButton("Urdu", callback_data="read_in_urd")
                                                                                                                                         ],
-                                                                                                                                        [ InlineKeyboardButton("═• Sᴇᴀʀᴄʜ 🇳​​​​​🇦​​​​​🇲​​​​​🇪​​​​​ 🇴​​​​​🇳​​​​​ 🇬​​​​​🇴​​​​​🇴​​​​​🇬​​​​​🇱​​​​​🇪​​​​​ •═", url=f"https://google.com/search?q={search}")],
+                                                                                                                                        [ InlineKeyboardButton("═• Search name on google​ •═", url=generated_link)],
                                                                                                                                         ]))
                 await asyncio.sleep(12)
                 await l.delete()    
