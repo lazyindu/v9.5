@@ -1662,7 +1662,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('↖️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ↗️', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
         ], [
             InlineKeyboardButton('🧞‍♀️ Sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
-                InlineKeyboardButton('🔍 Gʀᴏᴜᴘ', url='https://t.me/+tl1Ll8L8TbQwMjdl')
+                InlineKeyboardButton('🔍 Gʀᴏᴜᴘ', url=f'https://t.me/{MOVIE_GROUP_USERNAME}')
         ], [
             InlineKeyboardButton('🙆🏻 Hᴇʟᴘ 🦾', callback_data='help'),
             InlineKeyboardButton('🎁 Hᴇʟᴘ++', callback_data='leech_url_help'),
@@ -1700,7 +1700,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "about":
         buttons = [[
-                InlineKeyboardButton('🔍 Search Group​​​​​ 📈', url='https://t.me/+tl1Ll8L8TbQwMjdl'),
+                InlineKeyboardButton('🔍 Group​​​​​', url=f'https://t.me/{MOVIE_GROUP_USERNAME}'),
             InlineKeyboardButton('♥️ Source', callback_data='source')
         ], [
             InlineKeyboardButton('🏠 Home', callback_data='start'),
@@ -1803,7 +1803,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('♥️ Aʙᴏᴜᴛ', callback_data='about')
             ],[
             InlineKeyboardButton('Open settings', callback_data='openSettings'),
-            InlineKeyboardButton('ABOUT DEV', callback_data='about')
+            InlineKeyboardButton('💤Developer', url='https://telegram.me/LazyDeveloper')
             ],[
             InlineKeyboardButton('🔐 Close', callback_data='close_data')
             ]]
@@ -2423,14 +2423,11 @@ async def auto_filter(client, msg, spoll=False):
             search = re.sub(r"\b(pl(i|e)*?(s|z+|ease|se|ese|(e+)s(e)?)|((send|snd|giv(e)?|gib)(\sme)?)|movie(s)?|new|latest|bro|bruh|broh|helo|that|find|dubbed|link|venum|iruka|pannunga|pannungga|anuppunga|anupunga|anuppungga|anupungga|film|undo|kitti|kitty|tharu|kittumo|kittum|movie|any(one)|with\ssubtitle(s)?)", "", search, flags=re.IGNORECASE)
             search = re.sub(r"\s+", " ", search).strip()
             search = search.replace("-", " ")
-            search = search.replace(":","")
-            # Sample user message
-            searched_request = message.from_user.text
-            # Generate the search URL
-            generated_link = f"https://google.com/search?q={quote(searched_request)}"
-
+            search = search.replace(":","")            
             files, offset, total_results = await get_search_results_badAss_LazyDeveloperr(message.chat.id ,search, offset=0, filter=True)
             if not files:
+                # Generate the search URL
+                generated_link = f"https://google.com/search?q={quote(search)}"
                 await client.send_message(req_channel,f"-🦋 #REQUESTED_CONTENT 🦋-\n\n📝**Content Name** :`{search}`\n**Requested By**: {message.from_user.first_name}\n **USER ID**:{user_id}\n\n🗃️",
                                                                                                        reply_markup=InlineKeyboardMarkup([
                                                                                                                                         [InlineKeyboardButton(text=f"🤞Request Recieved", callback_data=f"notify_user_req_rcvd:{user_id}:{requested_movie}")],

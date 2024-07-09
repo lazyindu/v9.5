@@ -112,12 +112,14 @@ Here is the help for my COMMANDS."""
 ✯ 𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴: 𝙿𝚈𝚃𝙷𝙾𝙽 𝟹
 ✯ 𝙳𝙰𝚃𝙰 𝙱𝙰𝚂𝙴: 𝙼𝙾𝙽𝙶𝙾 𝙳𝙱
 ✯ 𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁: 𝙷𝙴𝚁𝙾𝙺𝚄
-✯ 𝙱𝚄𝙸𝙻𝙳 𝚂𝚃𝙰𝚃𝚄𝚂: 𝒗10.0.0 [ 𝑹𝑬𝑽𝑰𝑺𝑬𝑫 ]
+✯ 𝙱𝚄𝙸𝙻𝙳 𝚂𝚃𝙰𝚃𝚄𝚂: 𝒗10.0[𝑹𝑬𝑽𝑰𝑺𝑬𝑫]
 """
 
     SOURCE_TXT = """<b>NOTE:</b>
 - 🎉Lᴀᴢʏ Pʀɪɴᴄᴇss ɪs ᴀɴ ᴏᴘᴇɴ sᴏᴜʀᴄᴇ ᴘʀᴏᴊᴇᴄᴛ.
-- 🎁Sᴏᴜʀᴄᴇ - https://github.com/LazyDeveloperr/LazyPrincess  
+
+- 🎁Sᴏᴜʀᴄᴇ - https://github.com/LazyDeveloperr/LazyPrincess 
+ 
 - ✨Pʟᴇᴀsᴇ ɢɪᴠᴇ ᴀ sᴛᴀʀ ᴛᴏ ᴛʜɪs ʀᴇᴘᴏ ᴀғᴛᴇʀ ғᴏʀᴋ. Sᴀʟᴜᴛᴇ ᴛᴏ sɪʀ <a href=https://t.me/LazyDeveloperr>LᴀᴢʏDᴇᴠᴇʟᴏᴘᴇʀ</a> ғᴏʀ ᴀᴅᴅɪɴɢ ᴇxᴛʀᴀ ғᴇᴀᴛᴜʀᴇs ɪɴ ᴍᴇ.
 
 <b>DEV:</b>
@@ -216,11 +218,11 @@ Name - {}
     
 🎖️ <u>ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs</u> :
 
-● <code>2₹</code> ➛ <u>ʙʀᴏɴᴢᴇ ᴘʟᴀɴ</u> » <code>7 ᴅᴀʏꜱ</code>
-● <code>➛ 9₹</code> ➛ <u>ꜱɪʟᴠᴇʀ ᴘʟᴀɴ</u> » <code>31 ᴅᴀʏꜱ</code>
-● <code>3̶0̶₹̶ ➛ 23₹</code> ➛ <u>ɢᴏʟᴅ ᴘʟᴀɴ</u> » <code>91 ᴅᴀʏꜱ</code>
-● <code>10₹ ➛ 49₹</code> ➛ <u>ᴘʟᴀᴛɪɴᴜᴍ ᴘʟᴀɴ</u> » <code>181 ᴅᴀʏꜱ</code>
-● <code>10₹ ➛ 99₹</code> ➛ <u>ᴅɪᴀᴍᴏɴᴅ ᴘʟᴀɴ</u> » <code>366 ᴅᴀʏꜱ</code>
+● <code>2₹</code> ➛<u>ʙʀᴏɴᴢᴇ ᴘʟᴀɴ</u>»<code>7ᴅᴀʏꜱ</code>
+● <code>~~10₹~~➛ 9₹</code>➛<u>ꜱɪʟᴠᴇʀ ᴘʟᴀɴ</u>»<code>31ᴅᴀʏꜱ</code>
+● <code>~~30₹~~➛ 23₹</code>➛<u>ɢᴏʟᴅ ᴘʟᴀɴ</u>»<code>91ᴅᴀʏꜱ</code>
+● <code>~~60₹~~➛ 49₹</code>➛<u>ᴘʟᴀᴛɪɴᴜᴍ ᴘʟᴀɴ</u>»<code>181ᴅᴀʏꜱ</code>
+● <code>~~120₹~~➛ 99₹</code>➛<u>ᴅɪᴀᴍᴏɴᴅ ᴘʟᴀɴ</u>»<code>366ᴅᴀʏꜱ</code>
 
 💵 ᴜᴘɪ ɪᴅ - <code>lazydeveloper@ybl</code>
 📸 sᴄᴀɴ QR - <a href='https://telegra.ph/file/cd6c497f56f3915dc6363.jpg'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ Pay</a>
