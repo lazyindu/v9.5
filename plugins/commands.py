@@ -28,7 +28,7 @@ async def start(client, message):
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
         buttons = [
             [
-                InlineKeyboardButton('🔍 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​ 📈', url='https://t.me/+tl1Ll8L8TbQwMjdl')
+                InlineKeyboardButton('🔍 Sᴇᴀʀᴄʜ 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​ 📈', url='https://t.me/+tl1Ll8L8TbQwMjdl')
             ],
             [
                 InlineKeyboardButton('🙆🏻 Hᴇʟᴘ 🦾', url=f"https://t.me/{temp.U_NAME}?start=help"),
@@ -54,16 +54,16 @@ async def start(client, message):
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
     if len(message.command) != 2:
         buttons = [[
-            InlineKeyboardButton('➕↖️ Add Me To Your Groups ↗️➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+            InlineKeyboardButton('↖️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ↗️', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
             ],[
-            InlineKeyboardButton('🧞‍♀️ 🇮​​​​​🇳​​​​​🇱​​​​​🇮​​​​​🇳​​​​​🇪​​​​​ 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🧐', switch_inline_query_current_chat=''),
-                InlineKeyboardButton('🔍 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​ 📈', url='https://t.me/+tl1Ll8L8TbQwMjdl')
+            InlineKeyboardButton('🧞‍♀️ Sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
+            InlineKeyboardButton('🔍 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​', url='https://t.me/+tl1Ll8L8TbQwMjdl')
             ],[
-            InlineKeyboardButton('🙆🏻 Hᴇʟᴘ 🦾', callback_data='help'),
-            InlineKeyboardButton('🎁 Mᴏʀᴇ Hᴇʟᴘ', callback_data='leech_url_help'),
+            InlineKeyboardButton('🙆🏻 Hᴇʟᴘ ', callback_data='help'),
+            InlineKeyboardButton('🎁 Hᴇʟᴘ++', callback_data='leech_url_help'),
             ],[
-            InlineKeyboardButton('⚙ Open Settings', callback_data='openSettings'),
-            InlineKeyboardButton('♥️ About ♥️', callback_data='about')
+            InlineKeyboardButton('⚙ Sᴇᴛᴛɪɴɢs', callback_data='openSettings'),
+            InlineKeyboardButton('♥️ Aʙᴏᴜᴛ', callback_data='about')
             ],[
             InlineKeyboardButton('⪦ 𝕄𝕆𝕍𝕀𝔼 ℂℍ𝔸ℕℕ𝔼𝕃 ⪧', url='https://t.me/real_MoviesAdda3')
             ],[
@@ -112,16 +112,16 @@ async def start(client, message):
         return
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
-            InlineKeyboardButton('➕↖️ Add Me To Your Groups ↗️➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+            InlineKeyboardButton('↖️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ↗️', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
             ],[
-            InlineKeyboardButton('🧞‍♀️ 🇮​​​​​🇳​​​​​🇱​​​​​🇮​​​​​🇳​​​​​🇪​​​​​ 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🧐', switch_inline_query_current_chat=''),
-                InlineKeyboardButton('🔍 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​ 📈', url='https://t.me/+tl1Ll8L8TbQwMjdl')
+            InlineKeyboardButton('🧞‍♀️ Sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
+            InlineKeyboardButton('🔍 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​', url='https://t.me/+tl1Ll8L8TbQwMjdl')
             ],[
-            InlineKeyboardButton('🙆🏻 Hᴇʟᴘ 🦾', callback_data='help'),
-            InlineKeyboardButton('🎁 Mᴏʀᴇ Hᴇʟᴘ ', callback_data='leech_url_help'),
+            InlineKeyboardButton('🙆🏻 Hᴇʟᴘ', callback_data='help'),
+            InlineKeyboardButton('🎁 Hᴇʟᴘ++ ', callback_data='leech_url_help'),
         ],[
-            InlineKeyboardButton('⚙ Open Settings ', callback_data='openSettings'),
-            InlineKeyboardButton('♥️ About ♥️', callback_data='about')
+            InlineKeyboardButton('⚙ Sᴇᴛᴛɪɴɢs', callback_data='openSettings'),
+            InlineKeyboardButton('♥️ Aʙᴏᴜᴛ', callback_data='about')
             ],
         [
             InlineKeyboardButton('⪦ 𝕄𝕆𝕍𝕀𝔼 ℂℍ𝔸ℕℕ𝔼𝕃 ⪧', url='https://t.me/real_MoviesAdda3')

@@ -1658,16 +1658,16 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.answer()
     elif query.data == "start":
         buttons = [[
-            InlineKeyboardButton('➕↖️ Add Me To Your Groups ↗️➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+            InlineKeyboardButton('↖️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ↗️', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
         ], [
-            InlineKeyboardButton('🧞‍♀️ 🇮​​​​​🇳​​​​​🇱​​​​​🇮​​​​​🇳​​​​​🇪​​​​​ 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🧐', switch_inline_query_current_chat=''),
-                InlineKeyboardButton('🔍 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​ 📈', url='https://t.me/+tl1Ll8L8TbQwMjdl')
+            InlineKeyboardButton('🧞‍♀️ Sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
+                InlineKeyboardButton('🔍 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​', url='https://t.me/+tl1Ll8L8TbQwMjdl')
         ], [
             InlineKeyboardButton('🙆🏻 Hᴇʟᴘ 🦾', callback_data='help'),
-            InlineKeyboardButton('🎁 Mᴏʀᴇ Hᴇʟᴘ ', callback_data='leech_url_help'),
+            InlineKeyboardButton('🎁 Hᴇʟᴘ++', callback_data='leech_url_help'),
         ],[
-            InlineKeyboardButton('⚙ Open Settings ', callback_data='openSettings'),
-            InlineKeyboardButton('♥️ About ♥️', callback_data='about')
+            InlineKeyboardButton('⚙ Sᴇᴛᴛɪɴɢs', callback_data='openSettings'),
+            InlineKeyboardButton('♥️ Aʙᴏᴜᴛ', callback_data='about')
         ],[
             InlineKeyboardButton('⪦ 𝕄𝕆𝕍𝕀𝔼 ℂℍ𝔸ℕℕ𝔼𝕃 ⪧', url='https://t.me/real_MoviesAdda3')
         ],[
@@ -1699,7 +1699,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "about":
         buttons = [[
-                InlineKeyboardButton('🔍 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​ 📈', url='https://t.me/+tl1Ll8L8TbQwMjdl'),
+                InlineKeyboardButton('🔍 Sᴇᴀʀᴄʜ 🇬​​​​​🇷​​​​​🇴​​​​​🇺​​​​​🇵​​​​​ 📈', url='https://t.me/+tl1Ll8L8TbQwMjdl'),
             InlineKeyboardButton('♥️ Source', callback_data='source')
         ], [
             InlineKeyboardButton('🏠 Home', callback_data='start'),
@@ -1799,10 +1799,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
         buttons = InlineKeyboardMarkup(
             [[
             InlineKeyboardButton('🏠 Home', callback_data='start'),
-            InlineKeyboardButton('♥️ About ♥️', callback_data='about')
+            InlineKeyboardButton('♥️ Aʙᴏᴜᴛ', callback_data='about')
             ],[
-            InlineKeyboardButton('open settings ', callback_data='openSettings'),
-            InlineKeyboardButton('ABOUT DEV ', callback_data='about')
+            InlineKeyboardButton('Open settings', callback_data='openSettings'),
+            InlineKeyboardButton('ABOUT DEV', callback_data='about')
             ],[
             InlineKeyboardButton('🔐 Close', callback_data='close_data')
             ]]
@@ -1904,7 +1904,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         # Send message to user
         try:
             btn = [[
-                InlineKeyboardButton(text=f"🔍 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🇭​​​​​🇪​​​​​🇷​​​​​🇪​​​​​ 🔎", url=f"https://telegram.me/{MOVIE_GROUP_USERNAME}")
+                InlineKeyboardButton(text=f"🔍 Sᴇᴀʀᴄʜ 🇭​​​​​🇪​​​​​🇷​​​​​🇪​​​​​ 🔎", url=f"https://telegram.me/{MOVIE_GROUP_USERNAME}")
             ],[
                 InlineKeyboardButton(text=f"🐞 ══• ʀᴇᴘᴏʀᴛ ɪꜱꜱᴜᴇ •══ 🐞", url=f"https://telegram.me/LazyDeveloperSupport")
             ]]
@@ -1929,7 +1929,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         # Send message to user
         try:
             btn = [[
-                InlineKeyboardButton(text=f"🔍 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🇭​​​​​🇪​​​​​🇷​​​​​🇪​​​​​ 🔎", url=f"https://telegram.me/{MOVIE_GROUP_USERNAME}")
+                InlineKeyboardButton(text=f"🔍 Sᴇᴀʀᴄʜ 🇭​​​​​🇪​​​​​🇷​​​​​🇪​​​​​ 🔎", url=f"https://telegram.me/{MOVIE_GROUP_USERNAME}")
             ],[
                 InlineKeyboardButton(text=f"🐞 ══• ʀᴇᴘᴏʀᴛ ɪꜱꜱᴜᴇ •══ 🐞", url=f"https://telegram.me/LazyDeveloperSupport")
             ]]
@@ -1954,7 +1954,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         # Send message to user
         try:
             btn = [[
-                InlineKeyboardButton(text=f"🔍 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🇭​​​​​🇪​​​​​🇷​​​​​🇪​​​​​ 🔎", url=f"https://telegram.me/{MOVIE_GROUP_USERNAME}")
+                InlineKeyboardButton(text=f"🔍 Sᴇᴀʀᴄʜ 🇭​​​​​🇪​​​​​🇷​​​​​🇪​​​​​ 🔎", url=f"https://telegram.me/{MOVIE_GROUP_USERNAME}")
             ],[
                 InlineKeyboardButton(text=f"🐞 ══• ʀᴇᴘᴏʀᴛ ɪꜱꜱᴜᴇ •══ 🐞", url=f"https://telegram.me/LazyDeveloperSupport")
             ]]
@@ -1979,7 +1979,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         # Send message to user
         try:
             btn = [[
-                InlineKeyboardButton(text=f"🔍 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🇭​​​​​🇪​​​​​🇷​​​​​🇪​​​​​ 🔎", url=f"https://telegram.me/{MOVIE_GROUP_USERNAME}")
+                InlineKeyboardButton(text=f"🔍 Sᴇᴀʀᴄʜ 🇭​​​​​🇪​​​​​🇷​​​​​🇪​​​​​ 🔎", url=f"https://telegram.me/{MOVIE_GROUP_USERNAME}")
             ],[
                 InlineKeyboardButton(text=f"🐞 ══• ʀᴇᴘᴏʀᴛ ɪꜱꜱᴜᴇ •══ 🐞", url=f"https://telegram.me/LazyDeveloperSupport")
             ]]
@@ -2004,7 +2004,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         # Send message to user
         try:
             btn = [[
-                InlineKeyboardButton(text=f"🔍 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🇭​​​​​🇪​​​​​🇷​​​​​🇪​​​​​ 🔎", url=f"https://telegram.me/{MOVIE_GROUP_USERNAME}")
+                InlineKeyboardButton(text=f"🔍 Sᴇᴀʀᴄʜ 🇭​​​​​🇪​​​​​🇷​​​​​🇪​​​​​ 🔎", url=f"https://telegram.me/{MOVIE_GROUP_USERNAME}")
             ],[
                 InlineKeyboardButton(text=f"🐞 ══• ʀᴇᴘᴏʀᴛ ɪꜱꜱᴜᴇ •══ 🐞", url=f"https://telegram.me/LazyDeveloperSupport")
             ]]
@@ -2029,7 +2029,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         # Send message to user
         try:
             btn = [[
-                InlineKeyboardButton(text=f"🔍 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🇭​​​​​🇪​​​​​🇷​​​​​🇪​​​​​ 🔎", url=f"https://telegram.me/{MOVIE_GROUP_USERNAME}")
+                InlineKeyboardButton(text=f"🔍 Sᴇᴀʀᴄʜ 🇭​​​​​🇪​​​​​🇷​​​​​🇪​​​​​ 🔎", url=f"https://telegram.me/{MOVIE_GROUP_USERNAME}")
             ],[
                 InlineKeyboardButton(text=f"🐞 ══• ʀᴇᴘᴏʀᴛ ɪꜱꜱᴜᴇ •══ 🐞", url=f"https://telegram.me/LazyDeveloperSupport")
             ]]
@@ -2445,7 +2445,7 @@ async def auto_filter(client, msg, spoll=False):
                                                                                                                                           InlineKeyboardButton("Sanskrit", callback_data="read_in_san"),
                                                                                                                                           InlineKeyboardButton("Urdu", callback_data="read_in_urd")
                                                                                                                                         ],
-                                                                                                                                        [ InlineKeyboardButton("═• 🇸​​​​​🇪​​​​​🇦​​​​​🇷​​​​​🇨​​​​​🇭​​​​​ 🇳​​​​​🇦​​​​​🇲​​​​​🇪​​​​​ 🇴​​​​​🇳​​​​​ 🇬​​​​​🇴​​​​​🇴​​​​​🇬​​​​​🇱​​​​​🇪​​​​​ •═", url=f"https://google.com/search?q={search}")],
+                                                                                                                                        [ InlineKeyboardButton("═• Sᴇᴀʀᴄʜ 🇳​​​​​🇦​​​​​🇲​​​​​🇪​​​​​ 🇴​​​​​🇳​​​​​ 🇬​​​​​🇴​​​​​🇴​​​​​🇬​​​​​🇱​​​​​🇪​​​​​ •═", url=f"https://google.com/search?q={search}")],
                                                                                                                                         ]))
                 await asyncio.sleep(12)
                 await l.delete()    
