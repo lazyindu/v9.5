@@ -216,13 +216,13 @@ Name - {}
 """
     PLANS_TXT = """<b>👋 ʜᴇʏ {},
     
-🎖️ <u>ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs</u> :
+<blockquote>🎖️ ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs :</blockquote>
 
-● <code>2₹</code> ➛<u>ʙʀᴏɴᴢᴇ ᴘʟᴀɴ</u>»<code>7ᴅᴀʏꜱ</code>
-● <code>~~10₹~~➛ 9₹</code>➛<u>ꜱɪʟᴠᴇʀ ᴘʟᴀɴ</u>»<code>31ᴅᴀʏꜱ</code>
-● <code>~~30₹~~➛ 23₹</code>➛<u>ɢᴏʟᴅ ᴘʟᴀɴ</u>»<code>91ᴅᴀʏꜱ</code>
-● <code>~~60₹~~➛ 49₹</code>➛<u>ᴘʟᴀᴛɪɴᴜᴍ ᴘʟᴀɴ</u>»<code>181ᴅᴀʏꜱ</code>
-● <code>~~120₹~~➛ 99₹</code>➛<u>ᴅɪᴀᴍᴏɴᴅ ᴘʟᴀɴ</u>»<code>366ᴅᴀʏꜱ</code>
+● <code>02₹</code> ➛ <u>ʙʀᴏɴᴢᴇ ᴘʟᴀɴ</u>  » <code>7 ᴅᴀʏꜱ</code>
+● <code>09₹</code> ➛ <u>Sɪʟᴠᴇʀ ᴘʟᴀɴ</u>  » <code>31 ᴅᴀʏꜱ</code>
+● <code>23₹</code> ➛ <u>ɢᴏʟᴅ ᴘʟᴀɴ</u>    » <code>91 ᴅᴀʏꜱ</code>
+● <code>49₹</code> ➛ <u>ᴘʟᴀᴛɪɴᴜᴍ ᴘʟᴀɴ</u>» <code>181 ᴅᴀʏꜱ</code>
+● <code>99₹</code> ➛ <u>ᴅɪᴀᴍᴏɴᴅ ᴘʟᴀɴ</u> » <code>366 ᴅᴀʏꜱ</code>
 
 💵 ᴜᴘɪ ɪᴅ - <code>lazydeveloper@ybl</code>
 📸 sᴄᴀɴ QR - <a href='https://telegra.ph/file/cd6c497f56f3915dc6363.jpg'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ Pay</a>
