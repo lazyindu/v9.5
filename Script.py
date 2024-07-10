@@ -216,7 +216,7 @@ Name - {}
 """
     PLANS_TXT = """<b>👋 ʜᴇʏ {},
     
-<blockquote>🎖️ ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs :</blockquote>
+<i>🎖️ ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs :</i>
 
 ● <code>02₹</code> ➛ <u>ʙʀᴏɴᴢᴇ ᴘʟᴀɴ</u>  » <code>7 ᴅᴀʏꜱ</code>
 ● <code>09₹</code> ➛ <u>Sɪʟᴠᴇʀ ᴘʟᴀɴ</u>  » <code>31 ᴅᴀʏꜱ</code>
