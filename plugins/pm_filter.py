@@ -2437,20 +2437,19 @@ async def auto_filter(client, msg, spoll=False):
                                                                                                                                         [InlineKeyboardButton("❌Reject Req", callback_data=f"notify_user_req_rejected:{user_id}:{requested_movie}")]
                                                                                                                                         ]))
                 
-                l = await message.reply_text(text=f"△ HeY `{message.from_user.first_name}` 🥰,\nI ᴄᴏᴜʟᴅɴ'ᴛ ғɪɴᴅ ᴀɴʏᴛʜɪɴɢ ʀᴇʟᴀᴛᴇᴅ ᴛᴏ ʏᴏᴜʀ ʀᴇᴏ̨ᴜᴇsᴛ.🤧\nTʀʏ ʀᴇᴀᴅɪɴɢ ᴛʜᴇ ɪɴsᴛʀᴜᴄᴛɪᴏɴs ʙᴇʟᴏᴡ 👇",
+                l = await message.reply_text(text=f"△ HeY `{message.from_user.first_name}`🥰,\nI ᴄᴏᴜʟᴅɴ'ᴛ ғɪɴᴅ ᴀɴʏᴛʜɪɴɢ ʀᴇʟᴀᴛᴇᴅ ᴛᴏ ʏᴏᴜʀ ʀᴇᴏ̨ᴜᴇsᴛ.🤧\n>Tʀʏ ʀᴇᴀᴅɪɴɢ ᴛʜᴇ ɪɴsᴛʀᴜᴄᴛɪᴏɴs ʙᴇʟᴏᴡ 👇",
                                                                                                        reply_markup=InlineKeyboardMarkup([
                                                                                                                                         [ InlineKeyboardButton("HIN", callback_data="read_in_hin"),
                                                                                                                                           InlineKeyboardButton("ENG", callback_data="read_in_eng"),
                                                                                                                                           InlineKeyboardButton("MAL", callback_data="read_in_mal"),
-                                                                                                                                          InlineKeyboardButton("TAM", callback_data="read_in_tam"),
-                                                                                                                                          InlineKeyboardButton("TEL", callback_data="read_in_tel")
+                                                                                                                                          InlineKeyboardButton("TAM", callback_data="read_in_tam")
                                                                                                                                         ],[
                                                                                                                                           InlineKeyboardButton("Sanskrit", callback_data="read_in_san"),
                                                                                                                                           InlineKeyboardButton("Urdu", callback_data="read_in_urd")
                                                                                                                                         ],
                                                                                                                                         [ InlineKeyboardButton("═• Search name on google​ •═", url=generated_link)],
                                                                                                                                         ]))
-                await asyncio.sleep(12)
+                await asyncio.sleep(60)
                 await l.delete()    
                 if settings["spell_check"]:
                     return await advantage_spell_chok(msg)
