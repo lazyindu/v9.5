@@ -341,10 +341,13 @@ async def start(client, message):
         return
     elif data.startswith("files"):
         print('file is being checked and served')
-        user_id = message.from_user.id
         ident, req, key, offset = message.data.split("_")
-        print(f"REQ => {req}")
-        print(f"org user => {user_id}")
+        user_id = message.from_user.id
+        try:
+            print(f"REQ => {req}")
+            print(f"org user => {user_id}")
+        except Exception as e:
+            print(e)
         settings = await get_settings(chat_id)
         if not await db.has_prime_status(user_id) and settings['url_mode']:
             files_ = await get_file_details(file_id)
