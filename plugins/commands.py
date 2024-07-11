@@ -252,7 +252,7 @@ async def start(client, message):
         try:
             userid = message.from_user.id if message.from_user else None
             chat_id = int("-" + file_id.split("-")[1])
-
+    
             ghost_url = await get_shortlink(chat_id, f"https://telegram.me/{temp.U_NAME}?start=allfiles_{file_id}")
 
             client_msg = await client.send_message(

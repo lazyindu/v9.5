@@ -1757,11 +1757,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data.startswith("sendfiles"):
         print('i am hit in pm_filter')
         user = query.from_user.id
+        if temp.SHORT.get(user)==None:
+            return await query.message.reply_text(text="<b>Please Search Again in Group</b>")
+        else:
+            chat_id = temp.SHORT.get(user_id)
         ident, key = query.data.split("#")
         settings = await get_settings(query.message.chat.id)
         try:
             if settings['url_mode'] and not await db.has_prime_status(user):
-                ghost_url = await get_shortlink(f"https://telegram.me/{temp.U_NAME}?start=allfiles_{key}")
+                ghost_url = await get_shortlink(chat_id, f"https://telegram.me/{temp.U_NAME}?start=allfiles_{key}")
                 await query.answer(url=ghost_url)
                 return
             else:
