@@ -2719,6 +2719,7 @@ async def auto_filter(client, msg, spoll=False):
             set_message = random_message_template.format(mention_user) 
         except Exception as e:
             print(e)
+            pass
         try:
             z = await message.reply_photo(photo=imdb.get('poster'), caption=cap[:1024],
                                         reply_markup=InlineKeyboardMarkup(btn))
