@@ -2693,28 +2693,28 @@ async def auto_filter(client, msg, spoll=False):
     else:
         cap = f"⚡Baby, Here is what i found for your query {search}"
     if imdb and imdb.get('poster'):
-        try:
-            LAZY_SECONDS = '1800 1208 1309 3600 7600 3000 4020 2394 1029 2938 4994 3900 6899 9092 2487 5909 9283 2939 4578 1299 4565 3838 5599 6963 2992 4548 6576 8787 2903 1300 2003 1030 4858'
-            TEST_SEC = '156 277 282 638 238 129'
-            set_seconds = list(map(int, TEST_SEC.split()))
-            # set_seconds = list(map(int, LAZY_SECONDS.split()))
-            mention_user = message.from_user.mention
-            LAZY_MESSAGES = [
-                    "Hello {}, how are you?",
-                    "Come here please, {}.",
-                    "How is your day, {}?",
-                    "Good morning, {}.",
-                    "Good night, {}.",
-                    "Happy to see you, {}.",
-                    "Let's catch up soon, {}.",
-                    "Have a nice day, {}.",
-                    "Take care, {}.",
-                    "See you later, {}."
-                ]
-            random_message_template = random.choice(LAZY_MESSAGES)
-            set_message = random_message_template.format(mention_user) 
-        except Exception as e:
-            print(e)
+        # try:
+        #     LAZY_SECONDS = '1800 1208 1309 3600 7600 3000 4020 2394 1029 2938 4994 3900 6899 9092 2487 5909 9283 2939 4578 1299 4565 3838 5599 6963 2992 4548 6576 8787 2903 1300 2003 1030 4858'
+        #     TEST_SEC = '156 277 282 638 238 129'
+        #     set_seconds = list(map(int, TEST_SEC.split()))
+        #     # set_seconds = list(map(int, LAZY_SECONDS.split()))
+        #     mention_user = message.from_user.mention
+        #     LAZY_MESSAGES = [
+        #             "Hello {}, how are you?",
+        #             "Come here please, {}.",
+        #             "How is your day, {}?",
+        #             "Good morning, {}.",
+        #             "Good night, {}.",
+        #             "Happy to see you, {}.",
+        #             "Let's catch up soon, {}.",
+        #             "Have a nice day, {}.",
+        #             "Take care, {}.",
+        #             "See you later, {}."
+        #         ]
+        #     random_message_template = random.choice(LAZY_MESSAGES)
+        #     set_message = random_message_template.format(mention_user) 
+        # except Exception as e:
+        #     print(e)
         try:
             z = await message.reply_photo(photo=imdb.get('poster'), caption=cap[:1024],
                                         reply_markup=InlineKeyboardMarkup(btn))
@@ -2723,8 +2723,8 @@ async def auto_filter(client, msg, spoll=False):
                 await z.delete()
                 thanksaa = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
                 embraceaa = await thanksaa.reply_sticker(sticker=random.choice(lazystickerset))
-                await asyncio.sleep(set_seconds)
-                await message.reply_text(set_message)
+                # await asyncio.sleep(set_seconds)
+                # await message.reply_text(set_message)
         except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
             pic = imdb.get('poster')
             poster = pic.replace('.jpg', "._V1_UX360.jpg")
@@ -2736,8 +2736,8 @@ async def auto_filter(client, msg, spoll=False):
                 await m.delete()
                 thanks = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
                 embrace = await thanks.reply_sticker(sticker=random.choice(lazystickerset))
-                await asyncio.sleep(set_seconds)
-                await message.reply_text(set_message)
+                # await asyncio.sleep(set_seconds)
+                # await message.reply_text(set_message)
         except Exception as e:
             logger.exception(e)
             n = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
@@ -2746,8 +2746,8 @@ async def auto_filter(client, msg, spoll=False):
                 await n.delete()         
                 thanksz = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
                 embracez = await thanksz.reply_sticker(sticker=random.choice(lazystickerset))
-                await asyncio.sleep(set_seconds)
-                await message.reply_text(set_message)
+                # await asyncio.sleep(set_seconds)
+                # await message.reply_text(set_message)
                 
     else:
         p = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
@@ -2756,8 +2756,8 @@ async def auto_filter(client, msg, spoll=False):
             await p.delete()
             thanksx = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
             embracex = await thanksx.reply_sticker(sticker=random.choice(lazystickerset))
-            await asyncio.sleep(set_seconds)
-            await message.reply_text(set_message)
+            # await asyncio.sleep(set_seconds)
+            # await message.reply_text(set_message)
     if spoll:
         await msg.message.delete()
 
