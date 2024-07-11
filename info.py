@@ -57,6 +57,9 @@ lazy_renamers = [int(lazrenamers) if id_pattern.search(lazrenamers) else lazrena
 LAZY_RENAMERS = (lazy_renamers + ADMINS) if lazy_renamers else [] #Add user id of the user in this field those who you want to be Authentic user for file renaming features
 LZURL_PRIME_USERS = [int(lazyurlers) if id_pattern.search(lazyurlers) else lazyurlers for lazyurlers in environ.get('LZURL_PRIME_USERS', '5965340120').split()]
 
+QR_CODE_IMG = environ.get('QR_CODE_IMG','https://telegra.ph/file/cd6c497f56f3915dc6363.jpg') #add url link of your qr code to recieve money - use telegraph bot or other source to get image
+UPI_ID = environ.get('UPI_ID', 'lazydeveloper@ybl') #enter your upi id here - grab it from your online payment methods.
+
 # Others
 TUTORIAL = environ.get('TUTORIAL', 'https://t.me/real_MoviesAdda3/186') # Tutorial video link for opening shortlink website 
 IS_TUTORIAL = bool(environ.get('IS_TUTORIAL', True))
@@ -79,7 +82,6 @@ PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "False")), Fals
 #LazyRenamer Configs
 FLOOD = int(environ.get("FLOOD", "10"))
 LAZY_MODE = bool(environ.get("LAZY_MODE")) #make it true to enable file renaming feature in bot
-
 
 # Requested Content template variables --- 
 ADMIN_USRNM = environ.get('ADMIN_USRNM','LazyDeveloperr') # WITHOUT @
@@ -154,6 +156,7 @@ QUALITIES = ["360P", "", "480P", "", "720P", "", "1080P", "", "1440P", "", "2160
 
 MAX_B_TN = environ.get("MAX_B_TN", "10")
 MAX_BTN = is_enabled((environ.get('MAX_BTN', "True")), True)
+
 
 # Auto Delete For Group Message (Self Delete) #
 SELF_DELETE_SECONDS = int(environ.get('SELF_DELETE_SECONDS', 300))

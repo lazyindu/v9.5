@@ -68,6 +68,10 @@ async def start(client, message):
             InlineKeyboardButton('⪦ 𝕄𝕆𝕍𝕀𝔼 ℂℍ𝔸ℕℕ𝔼𝕃 ⪧', url='https://t.me/real_MoviesAdda3')
             ],[
             InlineKeyboardButton('💸 E𝐚𝐫𝐧 M𝐨𝐧𝐞𝐲 💸', callback_data="shortlink_info")
+            ],[
+                InlineKeyboardButton(
+                    "🦋 SUBSCRIBE YT Channel 🦋", url='https://youtube.com/@LazyDeveloperr'
+                )
             ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -128,7 +132,11 @@ async def start(client, message):
         ],
         [
             InlineKeyboardButton('💸 E𝐚𝐫𝐧 M𝐨𝐧𝐞𝐲 💸', callback_data="shortlink_info")
-        ]
+        ],[
+                InlineKeyboardButton(
+                    "🦋 SUBSCRIBE YT Channel 🦋", url='https://youtube.com/@LazyDeveloperr'
+                )
+            ]
         ]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -283,7 +291,7 @@ async def start(client, message):
         ghost = await get_shortlink(chat_id, f"https://telegram.me/{temp.U_NAME}?start=file_{file_id}")
         k = await client.send_message(
             chat_id=user_id,
-            text=f"🫂 ʜᴇʏ {message.from_user.mention}\n\n✅ ʏᴏᴜʀ ʟɪɴᴋ ɪꜱ ʀᴇᴀᴅʏ, ᴋɪɴᴅʟʏ ᴄʟɪᴄᴋ ᴏɴ ᴅᴏᴡɴʟᴏᴀᴅ ʙᴜᴛᴛᴏɴ.\n\n⚠️ ꜰɪʟᴇ ɴᴀᴍᴇ : <code>{files.file_name}</code> \n\n⚕ ꜰɪʟᴇ ꜱɪᴢᴇ : <code>{get_size(files.file_size)}</code>\n\n",
+            text=f"🫂 ʜᴇʏ {message.from_user.mention}\n\n✅ ʏᴏᴜʀ ʟɪɴᴋ ɪꜱ ʀᴇᴀᴅʏ, ᴋɪɴᴅʟʏ ᴄʟɪᴄᴋ ᴏɴ ᴅᴏᴡɴʟᴏᴀᴅ ʙᴜᴛᴛᴏɴ.\n\n🎁 ꜰɪʟᴇ ɴᴀᴍᴇ : <code>{files.file_name}</code> \n\n⚕ ꜰɪʟᴇ ꜱɪᴢᴇ : <code>{get_size(files.file_size)}</code>\n\n",
             reply_markup=InlineKeyboardMarkup(
                 [[
                     InlineKeyboardButton('📁 ᴅᴏᴡɴʟᴏᴀᴅ 📁', url=ghost)
@@ -297,7 +305,7 @@ async def start(client, message):
         return
     
     elif data.startswith("all"):
-        # print('Help ! i am hit')
+        # print('Help lazy bhai ! i am hit')
         files = temp.GETALL.get(file_id)
         if not files:
             return await message.reply('<b><i>ɴᴏ ꜱᴜᴄʜ ꜰɪʟᴇ ᴇxɪꜱᴛꜱ !</b></i>')
@@ -339,7 +347,7 @@ async def start(client, message):
         await k.edit_text("<b>ʏᴏᴜʀ ᴠɪᴅᴇᴏꜱ / ꜰɪʟᴇꜱ ᴀʀᴇ ᴅᴇʟᴇᴛᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ !\nᴋɪɴᴅʟʏ ꜱᴇᴀʀᴄʜ ᴀɢᴀɪɴ.</b>")
         return
     elif data.startswith("files"):
-        print('file is asking again to bypass url shortner')
+        # print('file is asking again to bypass url shortner')
         user_id = message.from_user.id
         if temp.SHORT.get(user_id)==None:
             return await message.reply_text(text="<b>Please Search Again in Group</b>")
@@ -350,7 +358,7 @@ async def start(client, message):
             files_ = await get_file_details(file_id)
             files = files_[0]
             generatedurl = await get_shortlink(chat_id, f"https://telegram.me/{temp.U_NAME}?start=file_{file_id}")
-            k = await client.send_message(chat_id=message.from_user.id,text=f"🫂 ʜᴇʏ {message.from_user.mention}\n\n✅ ʏᴏᴜʀ ʟɪɴᴋ ɪꜱ ʀᴇᴀᴅʏ, ᴋɪɴᴅʟʏ ᴄʟɪᴄᴋ ᴏɴ ᴅᴏᴡɴʟᴏᴀᴅ ʙᴜᴛᴛᴏɴ.\n\n⚠️ ꜰɪʟᴇ ɴᴀᴍᴇ : <code>{files.file_name}</code> \n\n⚕ ꜰɪʟᴇ ꜱɪᴢᴇ : <code>{get_size(files.file_size)}</code>\n\n", reply_markup=InlineKeyboardMarkup(
+            k = await client.send_message(chat_id=message.from_user.id,text=f"🫂 ʜᴇʏ {message.from_user.mention}\n\n✅ ʏᴏᴜʀ ʟɪɴᴋ ɪꜱ ʀᴇᴀᴅʏ, ᴋɪɴᴅʟʏ ᴄʟɪᴄᴋ ᴏɴ ᴅᴏᴡɴʟᴏᴀᴅ ʙᴜᴛᴛᴏɴ.\n\n🎁 ꜰɪʟᴇ ɴᴀᴍᴇ : <code>{files.file_name}</code> \n\n⚕ ꜰɪʟᴇ ꜱɪᴢᴇ : <code>{get_size(files.file_size)}</code>\n\n", reply_markup=InlineKeyboardMarkup(
                     [
                         [
                             InlineKeyboardButton('📁 ᴅᴏᴡɴʟᴏᴀᴅ 📁', url=generatedurl)
@@ -862,7 +870,7 @@ async def plan(client, message):
 	
         InlineKeyboardButton("📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ ʜᴇʀᴇ", url=f"https://t.me/{ADMIN_USRNM}")],[InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")
     ]]
-    await message.reply_photo(photo="https://graph.org/file/55a5392f88ec5a4bd3379.jpg", caption=script.PLANS_TXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(btn), parse_mode=enums.ParseMode.HTML)
+    await message.reply_photo(photo="https://graph.org/file/55a5392f88ec5a4bd3379.jpg", caption=script.PLANS_TXT.format(message.from_user.mention, UPI_ID, QR_CODE_IMG), reply_markup=InlineKeyboardMarkup(btn), parse_mode=enums.ParseMode.HTML)
 
 @Client.on_message(filters.command("shortlink"))
 async def shortlink(bot, message):

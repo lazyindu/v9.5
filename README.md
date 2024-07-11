@@ -141,8 +141,6 @@ python3 bot.py
  - Thanks To Gangster Baby Repo for rename feature.
  - Thanks to Adarsh for file-to-link repo.
  - Thanks to TG@SiliconOfficial for sharing me Cute_Repo to improve LazyPrincess.
- - Thanks TO TG@Rk_botowner 
- - Thanks TO TG@DeletedFromEarth
  - Thanks To All Everyone In This Journey
 
 ### Note
@@ -160,7 +158,7 @@ python3 bot.py
 
 
 #### 🧡 Respecting... 🧡
-- [🔥 LazyDeveloperr](https://github.com/LazyDeveloperr) 
+- Sir [🔥 LazyDeveloperr](https://github.com/LazyDeveloperr) 
 
 ### 🤩 INSPIRATION
 <a href="https://telegram.dog/LazyPrincessX_BOT">
