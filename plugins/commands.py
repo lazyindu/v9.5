@@ -342,10 +342,9 @@ async def start(client, message):
     elif data.startswith("files"):
         print('file is being checked and served')
         user_id = message.from_user.id
-        if temp.SHORT.get(user_id)==None:
-            return await message.reply_text(text="<b>Please Search Again in Group</b>")
-        else:
-            chat_id = temp.SHORT.get(user_id)
+        ident, req, key, offset = message.data.split("_")
+        print(f"REQ => {req}")
+        print(f"org user => {user_id}")
         settings = await get_settings(chat_id)
         if not await db.has_prime_status(user_id) and settings['url_mode']:
             files_ = await get_file_details(file_id)
@@ -364,6 +363,7 @@ async def start(client, message):
             await asyncio.sleep(600)
             await k.edit("<b>ʏᴏᴜʀ ᴍᴇꜱꜱᴀɢᴇ ɪꜱ ᴅᴇʟᴇᴛᴇᴅ !\nᴋɪɴᴅʟʏ ꜱᴇᴀʀᴄʜ ᴀɢᴀɪɴ.</b>")
             return
+    
     files_ = await get_file_details(file_id)           
     if not files_:
         pre, file_id = ((base64.urlsafe_b64decode(data + "=" * (-len(data) % 4))).decode("ascii")).split("_", 1)
