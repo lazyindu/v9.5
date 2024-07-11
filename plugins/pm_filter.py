@@ -2653,16 +2653,16 @@ async def auto_filter(client, msg, spoll=False):
     #waiting user to complete imdb process @LazyDeveloperr
     user = message.from_user
     full_name = user.first_name + " " + user.last_name if user.last_name else user.first_name
+    imdb = await get_poster(search, file=(files[0]).file_name) if settings["imdb"] else None
+    TEMPLATE = settings['template']
+    # waiting overs here @LazyDeveloperr
     waiting_message = await message.reply_text(f"Setting up your request {full_name}...")
     await asyncio.sleep(1)
     await waiting_message.delete()
-    serve_message = await message.reply_sticker(sticker=random.choice(lazystickerset))
-    imdb = await get_poster(search, file=(files[0]).file_name) if settings["imdb"] else None
-    TEMPLATE = settings['template']
-    await serve_message.delete()
-    # waiting overs here @LazyDeveloperr
-
     if imdb:
+        serve_message = await message.reply_sticker(sticker=random.choice(lazystickerset))
+        await serve_message.delete()
+    
         cap = TEMPLATE.format(
             query=search,
             title=imdb['title'],
@@ -2698,53 +2698,67 @@ async def auto_filter(client, msg, spoll=False):
         cap = f"⚡Baby, Here is what i found for your query {search}"
     if imdb and imdb.get('poster'):
         try:
+            LAZY_SECONDS = '1800 1208 1309 3600 7600 3000 4020 2394 1029 2938 4994 3900 6899 9092 2487 5909 9283 2939 4578 1299 4565 3838 5599 6963 2992 4548 6576 8787 2903 1300 2003 1030 4858'
+            TEST_SEC = '156 277 282 638 238 129'
+            set_seconds = list(map(int, TEST_SEC.split()))
+            # set_seconds = list(map(int, LAZY_SECONDS.split()))
+            mention_user = message.from_user.mention
+            LAZY_MESSAGES = [
+                    "Hello {}, how are you?",
+                    "Come here please, {}.",
+                    "How is your day, {}?",
+                    "Good morning, {}.",
+                    "Good night, {}.",
+                    "Happy to see you, {}.",
+                    "Let's catch up soon, {}.",
+                    "Have a nice day, {}.",
+                    "Take care, {}.",
+                    "See you later, {}."
+                ]
+            random_message_template = random.choice(LAZY_MESSAGES)
+            set_message = random_message_template.format(mention_user) 
+        except Exception as e:
+            print(e)
+        try:
             z = await message.reply_photo(photo=imdb.get('poster'), caption=cap[:1024],
                                         reply_markup=InlineKeyboardMarkup(btn))
-            thanksaa = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
-            embraceaa = await thanksaa.reply_sticker(sticker=random.choice(lazystickerset))
-            await asyncio.sleep(10)
-            await thanksaa.delete()
-            await embraceaa.delete()
+            
             if SELF_DELETE:
                 await asyncio.sleep(SELF_DELETE_SECONDS)
                 await z.delete()
+                thanksaa = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
+                embraceaa = await thanksaa.reply_sticker(sticker=random.choice(lazystickerset))
+                await asyncio.sleep(set_seconds)
+                await message.reply_text(set_message)
         except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
             pic = imdb.get('poster')
             poster = pic.replace('.jpg', "._V1_UX360.jpg")
 
             m = await message.reply_photo(photo=poster, caption=cap[:1024], reply_markup=InlineKeyboardMarkup(btn))
-            thanks = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
-            embrace = await thanks.reply_sticker(sticker=random.choice(lazystickerset))
-            await asyncio.sleep(10)
-            await thanks.delete()
-            await embrace.delete()
+            
             if SELF_DELETE:
                 await asyncio.sleep(SELF_DELETE_SECONDS)
                 await m.delete()
+                thanks = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
+                embrace = await thanks.reply_sticker(sticker=random.choice(lazystickerset))
 
         except Exception as e:
             logger.exception(e)
             n = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
-            thanksz = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
-            embracez = await thanksz.reply_sticker(sticker=random.choice(lazystickerset))
-            await asyncio.sleep(10)
-            await thanksz.delete()
-            await embracez.delete()
             if SELF_DELETE:
                 await asyncio.sleep(SELF_DELETE_SECONDS)
                 await n.delete()         
+                thanksz = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
+                embracez = await thanksz.reply_sticker(sticker=random.choice(lazystickerset))
+                
     else:
         p = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
-        thanksx = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
-        embracex = await thanksx.reply_sticker(sticker=random.choice(lazystickerset))
-        await asyncio.sleep(10)
-        await thanksx.delete()
-        await embracex.delete()
-        await asyncio.sleep(250)
-        await p.delete()
+        
         if SELF_DELETE:
             await asyncio.sleep(SELF_DELETE_SECONDS)
             await p.delete()
+            thanksx = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
+            embracex = await thanksx.reply_sticker(sticker=random.choice(lazystickerset))
     if spoll:
         await msg.message.delete()
 
