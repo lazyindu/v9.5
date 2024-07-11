@@ -299,6 +299,13 @@ async def start(client, message):
     
     elif data.startswith("all"):
         print('Help ! i am hit - all files')
+        user_id = message.from_user.id
+        try:
+            ident, req, key, offset = message.data.split("_")
+            print(f"REQ => {req}")
+            print(f"org user => {user_id}")
+        except Exception as e:
+            print(e)
         files = temp.GETALL.get(file_id)
         if not files:
             return await message.reply('<b><i>ɴᴏ ꜱᴜᴄʜ ꜰɪʟᴇ ᴇxɪꜱᴛꜱ !</b></i>')
