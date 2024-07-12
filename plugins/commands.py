@@ -343,12 +343,12 @@ async def start(client, message):
     elif data.startswith("files"):
         print('file is being checked and served')
         user_id = message.from_user.id
-        try:
-            ident, req, key, offset = message.data.split("_")
-            print(f"REQ => {req}")
-            print(f"org user => {user_id}")
-        except Exception as e:
-            print(e)
+        # try:
+        #     ident, req, key, offset = message.data.split("_")
+        #     print(f"REQ => {req}")
+        #     print(f"org user => {user_id}")
+        # except Exception as e:
+        #     print(e)
         if temp.SHORT.get(user_id)==None:
             return await message.reply_text(text="<b>Please Search Again in Group</b>")
         else:
