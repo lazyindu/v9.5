@@ -2700,7 +2700,8 @@ async def auto_filter(client, msg, spoll=False):
         try:
             LAZY_SECONDS = '1800 1208 1309 3600 7600 3000 4020 2394 1029 2938 4994 3900 6899 9092 2487 5909 9283 2939 4578 1299 4565 3838 5599 6963 2992 4548 6576 8787 2903 1300 2003 1030 4858'
             TEST_SEC = '156 277 282 638 238 129'
-            set_seconds = list(map(int, TEST_SEC.split()))
+            splitt_seconds = list(map(int, TEST_SEC.split()))
+            set_seconds = random.choice(splitt_seconds)
             # set_seconds = list(map(int, LAZY_SECONDS.split()))
             mention_user = message.from_user.mention
             LAZY_MESSAGES = [
