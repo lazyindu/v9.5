@@ -1658,7 +1658,25 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "pages":
         await query.answer()
     elif query.data == "start":
-        buttons = [[
+        if query.from_user.id in ADMINS:
+            buttons = [[
+                InlineKeyboardButton('↖️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ↗️', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+            ], [
+                InlineKeyboardButton('🧞‍♀️ Sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
+                    InlineKeyboardButton('🔍 Gʀᴏᴜᴘ', url=f'https://t.me/{MOVIE_GROUP_USERNAME}')
+            ], [
+                InlineKeyboardButton('🙆🏻 Hᴇʟᴘ 🦾', callback_data='help'),
+                InlineKeyboardButton('🎁 Hᴇʟᴘ++', callback_data='leech_url_help'),
+            ],[
+                InlineKeyboardButton('⚙ Sᴇᴛᴛɪɴɢs', callback_data='openSettings'),
+                InlineKeyboardButton('♥️ Aʙᴏᴜᴛ', callback_data='about')
+            ],[
+                InlineKeyboardButton('⪦ 𝕄𝕆𝕍𝕀𝔼 ℂℍ𝔸ℕℕ𝔼𝕃 ⪧', url='https://t.me/real_MoviesAdda3')
+            ],[
+                InlineKeyboardButton('💸 E𝐚𝐫𝐧 M𝐨𝐧𝐞𝐲 💸', callback_data="shortlink_info")
+            ]]
+        else:
+            buttons = [[
             InlineKeyboardButton('↖️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ↗️', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
         ], [
             InlineKeyboardButton('🧞‍♀️ Sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
@@ -1672,7 +1690,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ],[
             InlineKeyboardButton('⪦ 𝕄𝕆𝕍𝕀𝔼 ℂℍ𝔸ℕℕ𝔼𝕃 ⪧', url='https://t.me/real_MoviesAdda3')
         ],[
-            InlineKeyboardButton('💸 E𝐚𝐫𝐧 M𝐨𝐧𝐞𝐲 💸', callback_data="shortlink_info")
+            InlineKeyboardButton('🎉 Learn BOT making 🎊', url="https://youtube.com/@LazyDeveloperr")
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
@@ -2705,7 +2723,7 @@ async def auto_filter(client, msg, spoll=False):
             # set_seconds = list(map(int, LAZY_SECONDS.split()))
             mention_user = message.from_user.mention
             LAZY_MESSAGES = [
-                    "Hello {}, ?",
+                    "Hello {},  ?",
                     "Come here please, {}.",
                     "How is your day, {}?",
                     "Good morning, {}.",
@@ -2730,18 +2748,21 @@ async def auto_filter(client, msg, spoll=False):
                 await z.delete()
                 thanksaa = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
                 embraceaa = await thanksaa.reply_sticker(sticker=random.choice(lazystickerset))
+                await asyncio.sleep(set_seconds)
+                await message.reply_text(set_message)
         except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
             pic = imdb.get('poster')
             poster = pic.replace('.jpg', "._V1_UX360.jpg")
 
             m = await message.reply_photo(photo=poster, caption=cap[:1024], reply_markup=InlineKeyboardMarkup(btn))
-            
+
             if SELF_DELETE:
                 await asyncio.sleep(SELF_DELETE_SECONDS)
                 await m.delete()
                 thanks = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
                 embrace = await thanks.reply_sticker(sticker=random.choice(lazystickerset))
-
+                await asyncio.sleep(set_seconds)
+                await message.reply_text(set_message) 
         except Exception as e:
             logger.exception(e)
             n = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
@@ -2750,8 +2771,8 @@ async def auto_filter(client, msg, spoll=False):
                 await n.delete()         
                 thanksz = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
                 embracez = await thanksz.reply_sticker(sticker=random.choice(lazystickerset))
-        await asyncio.sleep(set_seconds)
-        await message.reply_text(set_message)       
+                await asyncio.sleep(set_seconds)
+                await message.reply_text(set_message)       
     else:
         p = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
         
@@ -2760,8 +2781,8 @@ async def auto_filter(client, msg, spoll=False):
             await p.delete()
             thanksx = await message.reply_text(f"♥ Thank you **{message.from_user.mention}**...\n<code>🎉 we love you 🎊</code>")
             embracex = await thanksx.reply_sticker(sticker=random.choice(lazystickerset))
-        await asyncio.sleep(set_seconds)
-        await message.reply_text(set_message)
+            await asyncio.sleep(set_seconds)
+            await message.reply_text(set_message)
     if spoll:
         await msg.message.delete()
 
